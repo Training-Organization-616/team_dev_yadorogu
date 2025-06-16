@@ -26,7 +26,6 @@ public class AdminServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
 
 		try {
 			String action = request.getParameter("action");
@@ -35,10 +34,14 @@ public class AdminServlet extends HttpServlet {
 			 *会員すべて表示
 			 */
 			if (action == null || action.length() == 0) {
+				//現在のセッションを取得
+				HttpSession session = request.getSession(false);
+				CustomersBean bean = (CustomersBean) session.getAttribute("user");
 
 				AdminDAO dao = new AdminDAO();
 				List<CustomersBean> list = dao.findAll();
 				request.setAttribute("customers", list);
+				session.setAttribute("user", bean);
 				gotoPage(request, response, "/admintop.jsp");
 
 				/*
