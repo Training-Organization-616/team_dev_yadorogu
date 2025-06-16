@@ -17,6 +17,12 @@ public class CustomersBean {
 
 	}
 
+	public CustomersBean(int id, String name, boolean isadmin) {
+		this.id = id;
+		this.name = name;
+		this.isAdmin = isadmin;
+	}
+
 	public CustomersBean(int id, String name, String address, String tel,
 			String email, String birthday, String membershipdate, String password, boolean isadmin) {
 		this.id = id;

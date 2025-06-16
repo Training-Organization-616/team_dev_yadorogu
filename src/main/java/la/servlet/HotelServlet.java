@@ -30,7 +30,7 @@ public class HotelServlet extends HttpServlet {
 		try {
 			String action = request.getParameter("action");
 			/*
-			 *タスクすべて表示
+			 *宿すべて表示
 			 */
 			if (action == null || action.length() == 0) {
 				HotelDAO dao = new HotelDAO();

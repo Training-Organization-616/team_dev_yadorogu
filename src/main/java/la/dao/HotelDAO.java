@@ -35,7 +35,7 @@ public class HotelDAO {
 	public List<HotelsBean> findAll() throws DAOException {
 
 		// SQL文の作成
-		String sql = "select h.name,h.price,c.name as category_name,h.checkin,h.checkout from hotels h "
+		String sql = "select h.id,h.name,h.price,c.name as category_name,h.checkin,h.checkout from hotels h "
 				+ "join categories c on h.category_id = c.id;";
 
 		try (// データベースへの接続
@@ -49,6 +49,7 @@ public class HotelDAO {
 			// フォーマット指定
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 			while (rs.next()) {
+				int id = rs.getInt("id");
 				String hotel_name = rs.getString("name");
 				int price = rs.getInt("price");
 				String name = rs.getString("category_name");
@@ -60,7 +61,7 @@ public class HotelDAO {
 				String in = checkinTime.format(formatter);
 				String out = checkoutTime.format(formatter);
 
-				HotelsBean bean = new HotelsBean(hotel_name, price, name, in, out);
+				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out);
 				list.add(bean);
 			}
 			// カテゴリ一覧をListとして返す
