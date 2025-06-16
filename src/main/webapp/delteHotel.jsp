@@ -8,7 +8,7 @@
 <title>宿削除画面</title>
 </head>
 <body>
-
+	
 	
 </body>
 </html>

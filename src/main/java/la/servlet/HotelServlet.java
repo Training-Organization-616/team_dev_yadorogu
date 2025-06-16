@@ -69,6 +69,11 @@ public class HotelServlet extends HttpServlet {
 					request.setAttribute("mess", "正しく入力してください");
 					gotoPage(request, response, "/addHotel.jsp");
 				}
+				/*
+				 * 宿削除機能
+				 */
+			} else if (action.equals("delete")) {
+
 			}
 		} catch (
 

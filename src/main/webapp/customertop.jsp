@@ -29,7 +29,6 @@
 				</c:otherwise>
 
 			</c:choose>
-			
 	</header>
 <h1>やどログ</h1>
 
