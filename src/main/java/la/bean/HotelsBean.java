@@ -8,6 +8,19 @@ public class HotelsBean {
 	private String checkout;
 	private int price;
 	private int maxperson;
+	private String category_name;
+
+	public HotelsBean() {
+
+	}
+
+	public HotelsBean(String name, int price, String category_name, String checkin, String checkout) {
+		this.name = name;
+		this.price = price;
+		this.category_name = category_name;
+		this.checkin = checkin;
+		this.checkout = checkout;
+	}
 
 	public HotelsBean(String name, int price, int category_id, String checkin, String checkout) {
 		this.name = name;
@@ -81,5 +94,13 @@ public class HotelsBean {
 
 	public void setMaxperson(int maxperson) {
 		this.maxperson = maxperson;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
 	}
 }
