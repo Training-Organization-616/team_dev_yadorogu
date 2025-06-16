@@ -10,10 +10,6 @@ public class HotelsBean {
 	private int maxperson;
 	private String category_name;
 
-	public HotelsBean() {
-
-	}
-
 	public HotelsBean(String name, int price, String category_name, String checkin, String checkout) {
 		this.name = name;
 		this.price = price;
