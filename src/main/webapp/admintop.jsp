@@ -41,25 +41,25 @@
 		</tr>
 		<c:forEach items="${customers}" var="customer">
 			<tr>
-				<td>${customers.id}</td>
-				<td>${customers.name}</td>
+				<td>${customer.id}</td>
+				<td>${customer.name}</td>
 				<td>
-				<c:if test="${customers.isAdmin}">会員</c:if>
-				<c:if test="${!customers.isAdmin}">管理者</c:if>
+				<c:if test="${customer.isAdmin}">会員</c:if>
+				<c:if test="${!customer.isAdmin}">管理者</c:if>
 				</td>
 				<td>
-				<c:if test="${customers.isAdmin}">
+				<c:if test="${customer.isAdmin}">
 				<form action="/team_dev_yadorogu/AdminServlet?action=update">
-				<input type="hidden" name="isAdmin" value="${customers.isAdmin}">
-				<input type="hidden" name="id" value="${customers.id}">
+				<input type="hidden" name="isAdmin" value="${customer.isAdmin}">
+				<input type="hidden" name="id" value="${customer.id}">
 				<button onclick="MoveCheck(event);">管理者に変更</button>
 				</form>
 				</c:if>
 				</td>
 				<td>
-				<c:if test="${customers.isAdmin}">
+				<c:if test="${customer.isAdmin}">
 				<form action="/team_dev_yadorogu/AdminServlet?action=delete">
-				<input type="hidden" name="id" value="${customers.id}">
+				<input type="hidden" name="id" value="${customer.id}">
 				<button onclick="MoveCheck(event);">退会</button>
 				</form>
 				</c:if>
