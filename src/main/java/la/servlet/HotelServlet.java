@@ -1,17 +1,18 @@
 package la.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import la.bean.TaskBean;
-//import la.bean.UserBean;
-//import la.dao.DAOException;
-//import la.dao.TaskDAO;
+import la.bean.HotelsBean;
+import la.dao.DAOException;
+import la.dao.HotelDAO;
 
 @WebServlet("/HotelServlet")
 public class HotelServlet extends HttpServlet {
@@ -24,41 +25,62 @@ public class HotelServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//		//日本語形式に変更
-		//		request.setCharacterEncoding("UTF-8");
-		//		try {
-		//			String action = request.getParameter("action");
-		//			/*
-		//			 *タスクすべて表示
-		//			 */
-		//			if (action == null || action.length() == 0) {
-		//				serBean info = (UserBean) session.getAttribute("info");
-		//				if (info == null) {
-		//					request.setAttribute("message", "セッション情報が失われました。");
-		//					gotoPage(request, response, "/errInternal.jsp");
-		//					return;
-		//				}
-		//				TaskDAO dao = new TaskDAO();
-		//				List<TaskBean> list = dao.findAll(info.getUser_id());
-		//				request.setAttribute("tasks", list);
-		//				gotoPage(request, response, "/showTask.jsp");
-		//			}
-		//		} catch (DAOException e) {
-		//			e.printStackTrace();
-		//			request.setAttribute("message", "内部エラーが発生しました。");
-		//			gotoPage(request, response, "/errInternal.jsp");
-		//		}
+		//日本語形式に変更
+		request.setCharacterEncoding("UTF-8");
+		try {
+			String action = request.getParameter("action");
+			/*
+			 *タスクすべて表示
+			 */
+			if (action == null || action.length() == 0) {
+				HotelDAO dao = new HotelDAO();
+				List<HotelsBean> list = dao.findAll();
+				request.setAttribute("hotels", list);
+				gotoPage(request, response, "/customertop.jsp");
+				/*
+				 * 宿の新規登録
+				 */
+			} else if (action.equals("addHotel")) {
+				HotelDAO dao = new HotelDAO();
+				String hotelName = request.getParameter("hotelName").strip();
+				String categoryId = request.getParameter("categoryId").strip();
+				String price = request.getParameter("price").strip();
+				String checkin = request.getParameter("checkin").strip();
+				String checkout = request.getParameter("checkout").strip();
+				String maxpersons = request.getParameter("maxpersons").strip();
+				if (hotelName != null && hotelName.length() != 0
+						&& categoryId != null && categoryId.length() != 0
+						&& price != null && price.length() != 0
+						&& checkin != null && checkin.length() != 0
+						&& checkout != null && checkout.length() != 0
+						&& maxpersons != null && maxpersons.length() != 0) {
+					int cid = Integer.parseInt(categoryId);
+					int pri = Integer.parseInt(price);
+					int max = Integer.parseInt(maxpersons);
+					dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
+					List<HotelsBean> list = dao.findAll();
+					request.setAttribute("hotels", list);
+					gotoPage(request, response, "/customertop.jsp");
+				}
+			}
+		} catch (
+
+		DAOException e) {
+			e.printStackTrace();
+			request.setAttribute("message", "内部エラーが発生しました。");
+			gotoPage(request, response, "/errInternal.jsp");
+		}
 	}
 
-	//	/*
-	//	 * gotopage
-	//	 */
-	//	private void gotoPage(HttpServletRequest request,
-	//			HttpServletResponse response, String page) throws ServletException,
-	//			IOException {
-	//		RequestDispatcher rd = request.getRequestDispatcher(page);
-	//		rd.forward(request, response);
-	//	}
+	/*
+	 * gotopage
+	 */
+	private void gotoPage(HttpServletRequest request,
+			HttpServletResponse response, String page) throws ServletException,
+			IOException {
+		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
