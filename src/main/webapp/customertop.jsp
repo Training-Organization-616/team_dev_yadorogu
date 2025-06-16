@@ -18,13 +18,13 @@
 					</h3>
 
 
-					<a href="/team_dev_yadorogu/LoginServlet?action=logout" >ログアウト</a>
+					<a href="/team_dev_yadorogu/loginServlet?action=logout" >ログアウト</a>
                     <a href="/team_dev_yadorogu/">情報変更</a>
 				</c:when>
 				<c:otherwise>
 
 
-					<a href="/team_dev_yadorogu/LoginServlet?action=login">ログイン</a>
+					<a href="/team_dev_yadorogu/loginServlet?action=login">ログイン</a>
 
 				</c:otherwise>
 

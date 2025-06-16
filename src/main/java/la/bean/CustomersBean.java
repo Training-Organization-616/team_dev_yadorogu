@@ -1,6 +1,6 @@
 package la.bean;
 
-public class CustomerBean {
+public class CustomersBean {
 	//プロパティ
 	private int id;
 	private String name;
@@ -13,11 +13,11 @@ public class CustomerBean {
 	private boolean isAdmin;
 
 	//コンストラクタ
-	public CustomerBean() {
+	public CustomersBean() {
 
 	}
 
-	public CustomerBean(int id, String name, String address, String tel,
+	public CustomersBean(int id, String name, String address, String tel,
 			String email, String birthday, String membershipdate, String password, boolean isadmin) {
 		this.id = id;
 		this.name = name;

@@ -11,7 +11,7 @@
 
 <h1>ログイン</h1>
 <strong>${message}</strong>
-<form action="team_dev_yadorogu/LoginServlet?action=login" method="post">
+<form action="/team_dev_yadorogu/LoginServlet?action=login" method="post">
 <input type="email" name="email"placeholder="メールアドレス"><br>
 <input type="password" name="password" placeholder="パスワード"><br>
 <button>ログイン</button>
