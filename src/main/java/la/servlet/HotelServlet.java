@@ -42,12 +42,14 @@ public class HotelServlet extends HttpServlet {
 				 */
 			} else if (action.equals("addHotel")) {
 				HotelDAO dao = new HotelDAO();
+				//パラメータ取得
 				String hotelName = request.getParameter("hotelName").strip();
 				String categoryId = request.getParameter("categoryId").strip();
 				String price = request.getParameter("price").strip();
 				String checkin = request.getParameter("checkin").strip();
 				String checkout = request.getParameter("checkout").strip();
 				String maxpersons = request.getParameter("maxpersons").strip();
+				//入力項目に空欄がないとき
 				if (hotelName != null && hotelName.length() != 0
 						&& categoryId != null && categoryId.length() != 0
 						&& price != null && price.length() != 0
@@ -57,10 +59,12 @@ public class HotelServlet extends HttpServlet {
 					int cid = Integer.parseInt(categoryId);
 					int pri = Integer.parseInt(price);
 					int max = Integer.parseInt(maxpersons);
+					//宿の新規登録
 					dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
 					List<HotelsBean> list = dao.findAll();
 					request.setAttribute("hotels", list);
 					gotoPage(request, response, "/customertop.jsp");
+					//入力項目に空きがあるとき
 				} else {
 					request.setAttribute("mess", "正しく入力してください");
 					gotoPage(request, response, "/addHotel.jsp");
