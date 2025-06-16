@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!--ログイン画面-->
+
 <h1>ログイン</h1>
 <strong>${message}</strong>
 <form action="team_dev_yadorogu/LoginServlet?action=login" method="post">
