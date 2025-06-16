@@ -29,10 +29,12 @@
 				</c:otherwise>
 
 			</c:choose>
+			
 	</header>
 <h1>やどログ</h1>
 
 <a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a>
+
  <form action="team_dev_yadorogu/ReserveServlet?action=add" method="post">
     <c:forEach items="${hotels}" var="hotels">
     <input type="hidden" name="hotel_id" value="${hotels.id}">
