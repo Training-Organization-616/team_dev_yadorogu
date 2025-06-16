@@ -61,6 +61,9 @@ public class HotelServlet extends HttpServlet {
 					List<HotelsBean> list = dao.findAll();
 					request.setAttribute("hotels", list);
 					gotoPage(request, response, "/customertop.jsp");
+				} else {
+					request.setAttribute("mess", "正しく入力してください");
+					gotoPage(request, response, "/addHotel.jsp");
 				}
 			}
 		} catch (
