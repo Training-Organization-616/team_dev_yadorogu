@@ -51,6 +51,7 @@
 				<c:if test="${customers.isAdmin}">
 				<form action="/team_dev_yadorogu/AdminServlet?action=update">
 				<input type="hidden" name="isAdmin" value="${customers.isAdmin}">
+				<input type="hidden" name="id" value="${customers.id}">
 				<button onclick="MoveCheck(event);">管理者に変更</button>
 				</form>
 				</c:if>
@@ -58,7 +59,7 @@
 				<td>
 				<c:if test="${customers.isAdmin}">
 				<form action="/team_dev_yadorogu/AdminServlet?action=delete">
-				<input type="hidden" name="isAdmin" value="${customers.id}">
+				<input type="hidden" name="id" value="${customers.id}">
 				<button onclick="MoveCheck(event);">退会</button>
 				</form>
 				</c:if>
