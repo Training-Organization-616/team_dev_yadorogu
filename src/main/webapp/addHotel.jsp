@@ -18,7 +18,8 @@
 	<br>
 	<!-- 登録フォーム表示 -->
 	<label>宿情報登録</label>
-	<form action="team_dev_yadorogu/HotelServlet" method="post">
+	<p>${mess}</p>
+	<form action="HotelServlet" method="post">
 	<table>
 		<tr><th>宿名</th>
 				<td><input type="text" name="hotelName"></td>
@@ -26,12 +27,12 @@
 		<tr>
 			<th>分類</th>
 				<td><select name="categoryId">
-					<option value="0">シティホテル</option>
-					<option value="1">リゾートホテル</option>
-					<option value="2">ビジネスホテル</option>
-					<option value="3">旅館</option>
-					<option value="4">民宿</option>
-					<option value="5">ペンション</option>
+					<option value="1">シティホテル</option>
+					<option value="2">リゾートホテル</option>
+					<option value="3">ビジネスホテル</option>
+					<option value="4">旅館</option>
+					<option value="5">民宿</option>
+					<option value="6">ペンション</option>
 				</select></td></tr>
 				<tr>
 			<th>料金</th>

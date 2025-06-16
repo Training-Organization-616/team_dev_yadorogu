@@ -82,8 +82,10 @@ public class HotelDAO {
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {
+			//フォーマットを時間と分の形でlocaltimeに変換にする
 			LocalTime in = LocalTime.parse(checkin, DateTimeFormatter.ofPattern("HH:mm"));
 			LocalTime out = LocalTime.parse(checkout, DateTimeFormatter.ofPattern("HH:mm"));
+			//DBに保存できるTimeに変換
 			Time checkinTime = Time.valueOf(in);
 			Time checkoutTime = Time.valueOf(out);
 			st.setString(1, name);
