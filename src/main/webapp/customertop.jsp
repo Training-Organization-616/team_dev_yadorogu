@@ -18,13 +18,13 @@
 					</h3>
 
 
-					<a href="/team_dev_yadorogu/loginServlet?action=logout" >ログアウト</a>
+					<a href="/team_dev_yadorogu/LoginServlet?action=logout" >ログアウト</a>
                     <a href="/team_dev_yadorogu/">情報変更</a>
 				</c:when>
 				<c:otherwise>
 
 
-					<a href="/team_dev_yadorogu/loginServlet?action=login">ログイン</a>
+					<a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a>
 
 				</c:otherwise>
 
@@ -33,7 +33,7 @@
 	</header>
 <h1>やどログ</h1>
 
-<!--名前は？-->
+<a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a>
  <form action="team_dev_yadorogu/ReserveServlet?action=add" method="post">
     <c:forEach items="${hotels}" var="hotels">
     <input type="hidden" name="hotel_id" value="${hotels.id}">

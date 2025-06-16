@@ -60,10 +60,13 @@ public class LoginServlet extends HttpServlet {
 				}
 				session.setAttribute("user", bean);
 				if (bean.isAdmin()) {
-					gotoPage(request, response, "/AdminServlet");
+					response.sendRedirect("HotelServlet");
 				} else {
-					gotoPage(request, response, "/HotelServlet");
+					response.sendRedirect("AdminServlet");
 				}
+			} else if (action.equals("logout")) {
+				session.invalidate();
+				response.sendRedirect("HotelServlet");
 			}
 
 		} catch (DAOException e) {
