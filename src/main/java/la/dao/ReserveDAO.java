@@ -75,7 +75,7 @@ public class ReserveDAO {
 	//　会員の予約履歴を検索
 	public List<ReservationsBean> findByCustomer_id(int customer_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT r.id, h.name, h.price, r.persons, r.date FROM reservations r JOIN hotels h ON r.hotel_id = h.id WHERE r.customer_id = ? ORDER BY id";
+		String sql = "SELECT r.id, h.name, h.price, r.persons, r.date FROM reservations r JOIN hotels h ON r.hotel_id = h.id WHERE r.customer_id = ? ORDER BY id DESC LIMIT 5";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
