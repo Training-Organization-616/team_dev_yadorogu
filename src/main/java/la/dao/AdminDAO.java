@@ -32,7 +32,7 @@ public class AdminDAO {
 	public List<CustomersBean> findAll() throws DAOException {
 
 		// SQL文の作成
-		String sql = "select id, name,isadmin from customers";
+		String sql = "select id, name,isadmin from customers order by id ";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
@@ -64,6 +64,25 @@ public class AdminDAO {
 	 */
 	public int deleteCustomer(int id) throws DAOException {
 		String sql = "DELETE FROM customers WHERE id = ?";
+		try (
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			st.setInt(1, id);
+			// SQLの実行
+			int rows = st.executeUpdate();
+			return rows;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+	}
+
+	/*
+	 * 管理者の権限変更
+	 */
+	public int updateCustomer(int id, boolean admin) throws DAOException {
+		String sql = "update customers set isadmin=false where id=?";
 		try (
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得

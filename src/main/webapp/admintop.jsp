@@ -46,21 +46,21 @@
 				<td>${customer.id}</td>
 				<td>${customer.name}</td>
 				<td>
-				<c:if test="${customer.isAdmin}">会員</c:if>
-				<c:if test="${!customer.isAdmin}">管理者</c:if>
+				<c:if test="${customer.admin}">会員</c:if>
+				<c:if test="${!customer.admin}">管理者</c:if>
 				</td>
 				<td>
-				<c:if test="${customer.isAdmin}">
-				<form action="/team_dev_yadorogu/AdminServlet?action=update">
-				<input type="hidden" name="isAdmin" value="${customer.isAdmin}">
+				<c:if test="${customer.admin}">
+				<form action="/team_dev_yadorogu/AdminServlet?action=update" method="post">
+				<input type="hidden" name="isAdmin" value="${customer.admin}">
 				<input type="hidden" name="id" value="${customer.id}">
 				<button onclick="MoveCheck(event);">管理者に変更</button>
 				</form>
 				</c:if>
 				</td>
 				<td>
-				<c:if test="${customer.isAdmin}">
-				<form action="/team_dev_yadorogu/AdminServlet?action=delete">
+				<c:if test="${customer.admin}">
+				<form action="/team_dev_yadorogu/AdminServlet?action=delete" method="post">
 				<input type="hidden" name="id" value="${customer.id}">
 				<button onclick="MoveCheck(event);">退会</button>
 				</form>

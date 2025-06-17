@@ -62,6 +62,11 @@ public class AdminServlet extends HttpServlet {
 				int id = Integer.parseInt(request.getParameter("id"));
 				String isAdmin = request.getParameter("isAdmin");
 				boolean admin = Boolean.parseBoolean(isAdmin);
+				AdminDAO dao = new AdminDAO();
+				dao.updateCustomer(id, admin);
+				List<CustomersBean> list = dao.findAll();
+				request.setAttribute("customers", list);
+				gotoPage(request, response, "/admintop.jsp");
 
 			}
 		} catch (
