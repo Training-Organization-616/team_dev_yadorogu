@@ -42,12 +42,12 @@ public class AdminDAO {
 				ResultSet rs = st.executeQuery();) {
 			// 結果の取得および表示
 			List<CustomersBean> list = new ArrayList<CustomersBean>();
-			// フォーマット指定
+			//レコード取得
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				boolean isadmin = rs.getBoolean("isadmin");
-
+				//会員一覧表示のためのコンストラクタ
 				CustomersBean bean = new CustomersBean(id, name, isadmin);
 				list.add(bean);
 			}
@@ -63,13 +63,17 @@ public class AdminDAO {
 	 * 会員の削除
 	 */
 	public int deleteCustomer(int id) throws DAOException {
+		//予約情報（子）のデータ削除
 		String sql1 = "DELETE FROM reservations WHERE customer_id = ?";
+		//予約情報（親）のデータ削除
 		String sql2 = "DELETE FROM customers WHERE id = ?";
 		try (
+				// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st1 = con.prepareStatement(sql1);
 				PreparedStatement st2 = con.prepareStatement(sql2);) {
+			//「?」に代入
 			st1.setInt(1, id);
 			st2.setInt(1, id);
 			// SQLの実行
@@ -88,9 +92,11 @@ public class AdminDAO {
 	public int updateCustomer(int id) throws DAOException {
 		String sql = "update customers set isadmin=false where id=?";
 		try (
+				// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {
+			//「?」に代入
 			st.setInt(1, id);
 			// SQLの実行
 			int rows = st.executeUpdate();

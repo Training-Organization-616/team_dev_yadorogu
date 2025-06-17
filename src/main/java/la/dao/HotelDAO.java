@@ -38,7 +38,8 @@ public class HotelDAO {
 		String sql = "select h.id,h.name,h.price,c.name as category_name,h.checkin,h.checkout from hotels h "
 				+ "join categories c on h.category_id = c.id;";
 
-		try (// データベースへの接続
+		try (
+				// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);
@@ -46,17 +47,23 @@ public class HotelDAO {
 				ResultSet rs = st.executeQuery();) {
 			// 結果の取得および表示
 			List<HotelsBean> list = new ArrayList<HotelsBean>();
+
 			// フォーマット指定
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+			//レコード取得
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String hotel_name = rs.getString("name");
 				int price = rs.getInt("price");
 				String name = rs.getString("category_name");
+
+				/*
+				 * Time型
+				 */
 				//localtime型で取得
 				LocalTime checkinTime = rs.getTime("checkin").toLocalTime();
 				LocalTime checkoutTime = rs.getTime("checkout").toLocalTime();
-
 				// 文字列に変換
 				String in = checkinTime.format(formatter);
 				String out = checkoutTime.format(formatter);
@@ -83,12 +90,16 @@ public class HotelDAO {
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {
+			/*
+			 * Time型
+			 */
 			//フォーマットを時間と分の形でlocaltimeに変換にする
 			LocalTime in = LocalTime.parse(checkin, DateTimeFormatter.ofPattern("HH:mm"));
 			LocalTime out = LocalTime.parse(checkout, DateTimeFormatter.ofPattern("HH:mm"));
 			//DBに保存できるTimeに変換
 			Time checkinTime = Time.valueOf(in);
 			Time checkoutTime = Time.valueOf(out);
+
 			st.setString(1, name);
 			st.setInt(2, code);
 			st.setTime(3, checkinTime);
@@ -112,7 +123,8 @@ public class HotelDAO {
 		// SQL文の作成
 		String sql = "select id,name  from hotels";
 
-		try (// データベースへの接続
+		try (
+				// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);
@@ -140,6 +152,7 @@ public class HotelDAO {
 	public int deleteHotel(int id) throws DAOException {
 		String sql = "DELETE FROM hotels WHERE id = ?";
 		try (
+				// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {

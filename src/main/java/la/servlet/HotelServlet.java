@@ -28,18 +28,23 @@ public class HotelServlet extends HttpServlet {
 		//日本語形式に変更
 		request.setCharacterEncoding("UTF-8");
 		try {
+			//actionパラメータ取得
 			String action = request.getParameter("action");
+
 			/*
-			 *宿すべて表示
+			 *宿すべて表示（会員トップ画面）
 			 */
 			if (action == null || action.length() == 0) {
 				HotelDAO dao = new HotelDAO();
+				//"findAll"で宿情報一覧取得
 				List<HotelsBean> list = dao.findAll();
 				request.setAttribute("hotels", list);
 				gotoPage(request, response, "/customertop.jsp");
+
 				/*
 				 * 宿の新規登録
 				 */
+				//「登録」ボタン押下
 			} else if (action.equals("addHotel")) {
 				HotelDAO dao = new HotelDAO();
 				//パラメータ取得
@@ -56,14 +61,16 @@ public class HotelServlet extends HttpServlet {
 						&& checkin != null && checkin.length() != 0
 						&& checkout != null && checkout.length() != 0
 						&& maxpersons != null && maxpersons.length() != 0) {
+					//カテゴリーID,価格、最大宿泊可能人数を整数化
 					int cid = Integer.parseInt(categoryId);
 					int pri = Integer.parseInt(price);
 					int max = Integer.parseInt(maxpersons);
-					//宿の新規登録
+					//"addHotel"で宿の新規登録
 					dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
 					List<HotelsBean> list = dao.findAll();
 					request.setAttribute("hotels", list);
 					gotoPage(request, response, "/AdminServlet?action=");
+
 					//入力項目に空きがあるとき
 				} else {
 					request.setAttribute("mess", "正しく入力してください");
@@ -73,21 +80,23 @@ public class HotelServlet extends HttpServlet {
 				/*
 				 * 宿削除機能
 				 */
-
-				//宿削除画面遷移
+				//「宿情報」リンク押下
 			} else if (action.equals("delete")) {
+				//宿情報取得（ID,名前のみ）
 				HotelDAO dao = new HotelDAO();
 				List<HotelsBean> list = dao.findAllHotelsAdmin();
 				request.setAttribute("hotels", list);
-				gotoPage(request, response, "delteHotel.jsp");
-				//宿削除
+				gotoPage(request, response, "/delteHotel.jsp");
+
+				//宿削除ボタン押下
 			} else if (action.equals("deleteHotel")) {
 				int id = Integer.parseInt(request.getParameter("id"));
 				HotelDAO dao = new HotelDAO();
+				//"deleteHotel"で宿情報削除
 				dao.deleteHotel(id);
 				List<HotelsBean> list = dao.findAllHotelsAdmin();
 				request.setAttribute("hotels", list);
-				gotoPage(request, response, "/AdminServlet?action=");
+				gotoPage(request, response, "/delteHotel.jsp");
 			}
 
 		} catch (
