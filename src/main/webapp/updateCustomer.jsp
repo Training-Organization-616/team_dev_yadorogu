@@ -24,7 +24,9 @@
 <div class="center"><label>情報変更</label></div>
 
 <br>
-${message}
+<div class="mess">
+	<strong class="mes">${message}</strong>
+	</div>
 <form action="/team_dev_yadorogu/CustomerServlet?action=updateCustomer" method="post">
   <table class="form-table">
     <tr>
