@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 
 <div class="header-glass">
   <div class="container">
-    <div class="logo">やどログ</div> 
+    <a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
 
     <nav class="nav-wrapper">
       <ul class="nav-links">
@@ -22,7 +23,7 @@
           <c:when test="${not empty user}">
             <li class="greeting">こんにちは、<b>${user.name}</b>さん</li>
             <li><a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a></li>
-            <li><a href="/team_dev_yadorogu/">情報変更</a></li>
+            <li><a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a></li>
           </c:when>
           <c:otherwise>
             <li><a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a></li>
@@ -38,28 +39,28 @@
 
 
 
+<div class="card-container">
+<c:forEach items="${hotels}" var="hotel">
+  <form action="/team_dev_yadorogu/ReserveServlet" method="post" class="hotel-card">
+    <input type="hidden" name="hotel_id" value="${hotel.id}">
+    <h3 class="hotel-name">${hotel.name}</h3>
 
-<c:forEach items="${hotels}" var="hotels">
- <form action="/team_dev_yadorogu/ReserveServlet" method="post">
-    <input type="hidden" name="hotel_id" value="${hotels.id}">
-    	${hotels.id}::
-        ${hotels.name}
-         1泊：${hotels.price}
-               
-                    <c:choose>
-                        <c:when test="${hotels.category_id==1}">シティホテル</c:when>
-                        <c:when test="${hotels.category_id==2}">リゾートホテル</c:when>
-                        <c:when test="${hotels.category_id==3}">ビジネスホテル</c:when>
-                        <c:when test="${hotels.category_id==4}">旅館</c:when>
-                        <c:when test="${hotels.category_id==5}">民宿</c:when>
-                        <c:when test="${hotels.category_id==6}">ペンション</c:when>
-                    </c:choose>
-             
-          チェックイン時間：${hotels.checkin}
-        チェックアウト時間：${hotels.checkout}
-        <button>予約</button>
-		</form>
-	</c:forEach>
+
+
+<p><strong>1泊：</strong>
+  <fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円
+</p>
+
+
+    <p><strong>カテゴリ：</strong>${hotel.category_name}</p>
+
+    <p><strong>チェックイン：</strong>${hotel.checkin}</p>
+    <p><strong>チェックアウト：</strong>${hotel.checkout}</p>
+
+    <button type="submit">予約</button>
+  </form>
+</c:forEach>
+</div>
 
 </body>
 </html>

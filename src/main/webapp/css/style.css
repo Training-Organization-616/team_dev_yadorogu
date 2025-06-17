@@ -169,3 +169,65 @@ body {
     display: flex;
   }
 }
+.greeting {
+  color: #C6A57A;           /* ヘッダーで使用している文字色と統一 */
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+
+/*カード表示*/
+.hotel-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4A3F35;
+  transition: transform 0.2s ease;
+  text-align:center;
+}
+
+.hotel-card:hover {
+  transform: translateY(-5px);
+}
+
+.hotel-card h3.hotel-name {
+  margin-top: 0;
+  color: #C6A57A;
+  font-size: 24px;
+}
+
+.hotel-card button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #C6A57A;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hotel-card button:hover {
+  background-color: #b08968;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;              /* はみ出したら折り返す */
+  gap: 24px;                    /* カード間の隙間 */
+  justify-content: center;      /* 中央寄せ（space-between も可） */
+  padding: 20px;
+}
+
+.hotel-card {
+  width: 300px;
+  /* その他のスタイルはそのままでOK */
+}
+
+
+
