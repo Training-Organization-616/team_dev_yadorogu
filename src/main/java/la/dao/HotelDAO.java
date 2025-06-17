@@ -80,6 +80,26 @@ public class HotelDAO {
 	}
 
 	/*
+	 * 宿名チェック
+	 */
+	public boolean checkHotel(String indexname) throws DAOException {
+		// SQL文の作成
+		String sql = "SELECT name FROM hotels WHERE name = ?";
+
+		try (
+				Connection con = DriverManager.getConnection(url, user, pass);
+				PreparedStatement st = con.prepareStatement(sql)) {
+			st.setString(1, indexname);
+			try (ResultSet rs = st.executeQuery()) {
+				return rs.next(); // レコードが1件でもあれば true（＝宿名が存在）
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
+
+	/*
 	 * 宿の新規登録
 	 */
 	public int addHotel(String name, int code, int price, String checkin, String checkout, int maxperson)

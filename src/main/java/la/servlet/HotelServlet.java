@@ -61,6 +61,14 @@ public class HotelServlet extends HttpServlet {
 						&& checkin != null && checkin.length() != 0
 						&& checkout != null && checkout.length() != 0
 						&& maxpersons != null && maxpersons.length() != 0) {
+					//  宿名重複チェック追加
+					boolean duplicate = dao.checkHotel(hotelName);
+					if (duplicate) {
+						// 宿名がすでに登録されていた場合は、エラーメッセージとともに画面に戻す
+						request.setAttribute("mess", "この宿はすでに登録されています");
+						gotoPage(request, response, "/addHotel.jsp");
+						return; // 処理をここで止める
+					}
 					//カテゴリーID,価格、最大宿泊可能人数を整数化
 					int cid = Integer.parseInt(categoryId);
 					int pri = Integer.parseInt(price);
@@ -70,11 +78,13 @@ public class HotelServlet extends HttpServlet {
 					List<HotelsBean> list = dao.findAll();
 					request.setAttribute("hotels", list);
 					gotoPage(request, response, "/AdminServlet?action=");
+					//重複した宿名が存在しているとき
 
 					//入力項目に空きがあるとき
 				} else {
 					request.setAttribute("mess", "正しく入力してください");
 					gotoPage(request, response, "/addHotel.jsp");
+
 				}
 
 				/*
