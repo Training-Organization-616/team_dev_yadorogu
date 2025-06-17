@@ -36,6 +36,10 @@
 	<form action="/team_dev_yadorogu/ReserveServlet?action=add" method="post">
 		<div class="center"><label>宿予約</label></div>
 		<input type="hidden" name="hotel_id" value="${hotel.id}">
+		<br>
+<div class="mess">
+	<strong class="mes">${message}</strong>
+	</div>
 		<table>
 			<tr><th>ホテル名</th>
 				<td>${hotel.name}</td>
