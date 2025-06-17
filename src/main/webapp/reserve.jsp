@@ -6,38 +6,64 @@
 <head>
 <meta charset="UTF-8">
 <title>予約確認</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/customer.css">
 </head>
 <body>
+<div class="header-glass">
+  <div class="container">
+    <a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
+
+    <nav class="nav-wrapper">
+      <ul class="nav-links">
+        <c:choose>
+          <c:when test="${not empty user}">
+            <li class="greeting">こんにちは、<b>${user.name}</b>さん</li>
+            <li><a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a></li>
+            <li><a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a></li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a></li>
+          </c:otherwise>
+        </c:choose>
+        <li><a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<br>
 	<form action="/team_dev_yadorogu/ReserveServlet?action=add" method="post">
-		宿予約${hotel.id}
+		<div class="center"><label>宿予約${hotel.id}</label></div>
 		<input type="hidden" name="hotel_id" value="${hotel.id}">
 		<table>
-			<tr>
+			<tr><th>ホテル名</th>
 				<td>${hotel.name}</td>
 			</tr>
-			<tr>
-				<td>料金：${hotel.price}</td>
+			<tr><th>料金</th>
+				<td>${hotel.price}円</td>
+			</tr>
+			<tr><th>チェックイン時間</th>
+				<td>${hotel.checkin}</td>
+			</tr>
+			<tr><th>チェックアウト時間</th>
+				<td>${hotel.checkout}</td>
 			</tr>
 			<tr>
-				<td>チェックイン時間：${hotel.checkin}</td>
-			</tr>
-			<tr>
-				<td>チェックアウト時間：${hotel.checkout}</td>
-			</tr>
-			<tr>
+			<th>人数</th>
 				<td>
-					人数：<select name="persons">
+				<select name="persons">
 						<c:forEach var="i" begin="1" end="${hotel.maxperson}" step="1">
 							<option value="${i}">${i}</option>
 						</c:forEach>
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td>チェックイン日時：<input type="date" name="date"></td>
+			<tr><th>チェックイン日時</th>
+				<td><input type="date" name="date"></td>
 			</tr>
 		</table>
-		お客様情報確認
+		<br>
+		<div class="center"><label>お客様情報確認</label></div>
 		<table>
 			<tr>
 				<th>お名前</th>
@@ -52,7 +78,10 @@
 				<td>${user.email}</td>
 			</tr>
 		</table>
-		<button>この内容で予約</button>
+		<br>
+		<div class="center">
+		<button class="btn btn-border"><span>予約を確定する</span></button>
+		</div>
 	</form>
 </body>
 </html>

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>予約完了</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css">
+	href="${pageContext.request.contextPath}/css/customer.css">
 </head>
 <body>
 <div class="header-glass">
@@ -30,7 +31,8 @@
     </nav>
   </div>
 </div>
-
-	ご予約ありがとうございました。
+<div class="thk">
+	<p>ご予約ありがとうございました。</p>
+	</div>
 </body>
 </html>

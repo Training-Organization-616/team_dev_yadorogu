@@ -1,28 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>情報変更</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/customer.css">
 </head>
 <body>
-情報変更<br>
+<div class="header-glass">
+  <div class="container">
+    <a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
+
+    <nav class="nav-wrapper">
+      <ul class="nav-links">
+        <c:choose>
+          <c:when test="${not empty user}">
+            <li class="greeting">こんにちは、<b>${user.name}</b>さん</li>
+            <li><a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a></li>
+            <li><a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a></li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a></li>
+          </c:otherwise>
+        </c:choose>
+        <li><a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="center"><label>情報変更</label></div>
+
+<br>
 ${message}
 <form action="/team_dev_yadorogu/CustomerServlet?action=updateCustomer" method="post">
-	<input type="text" name="customerName" placeholder="名前" value="${user.name}"><br>
-	<input type="text" name="address" placeholder="住所" value="${user.address}"><br>
-	<input type="email" name="email" placeholder="メールアドレス" value="${user.email}"><br>
-	<input type="tel" name="tel" placeholder="電話番号" value="${user.tel}"><br>
-	<input type="date" name="birthday" placeholder="生年月日" value="${user.birthday}"><br>
-	<input type="password" name="password" placeholder="パスワード"><br>
-	<input type="password" name="passwordCheck" placeholder="確認用パスワード"><br>
-	<button onclick="MoveCheck(event);">変更</button>
-</form>
-<form action="/team_dev_yadorogu/CustomerServlet?action=delete" method="post">
-<button  onclick="MoveCheck(event);">退会</button>
+  <table class="form-table">
+    <tr>
+      <th>名前</th>
+      <td><input type="text" name="customerName" value="${user.name}" placeholder="名前"></td>
+    </tr>
+    <tr>
+      <th>住所</th>
+      <td><input type="text" name="address" value="${user.address}" placeholder="住所"></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><input type="email" name="email" value="${user.email}" placeholder="メールアドレス"></td>
+    </tr>
+    <tr>
+      <th>電話番号</th>
+      <td><input type="tel" name="tel" value="${user.tel}" placeholder="電話番号"></td>
+    </tr>
+    <tr>
+      <th>生年月日</th>
+      <td><input type="date" name="birthday" value="${user.birthday}" placeholder="生年月日"></td>
+    </tr>
+    <tr>
+      <th>パスワード</th>
+      <td><input type="password" name="password" placeholder="パスワード"></td>
+    </tr>
+    <tr>
+      <th>確認用パスワード</th>
+      <td><input type="password" name="passwordCheck" placeholder="確認用パスワード"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: center;">
+        <button class="btn btn-border" onclick="MoveCheck(event);"><span>変更</span></button>
+      </td>
+    </tr>
+  </table>
 </form>
 
+<div class="right">
+<form action="/team_dev_yadorogu/CustomerServlet?action=delete" method="post">
+<button  onclick="MoveCheck(event);" class="out"><span>退会</span></button>
+</form>
+</div>
 <script type="text/javascript">
 //ダイアログでの処理
 function MoveCheck(event) {
