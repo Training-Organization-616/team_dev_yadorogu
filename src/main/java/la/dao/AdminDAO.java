@@ -79,9 +79,9 @@ public class AdminDAO {
 	}
 
 	/*
-	 * 管理者の権限変更
+	 * 会員の権限変更
 	 */
-	public int updateCustomer(int id, boolean admin) throws DAOException {
+	public int updateCustomer(int id) throws DAOException {
 		String sql = "update customers set isadmin=false where id=?";
 		try (
 				Connection con = DriverManager.getConnection(url, user, pass);
@@ -94,6 +94,45 @@ public class AdminDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
+		}
+	}
+
+	/*
+	 * 会員の検索
+	 */
+	public List<CustomersBean> searchCustomer(int index) throws DAOException {
+
+		// SQL文の作成
+		String sql = "select id, name,isadmin from customers where id=? ";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			st.setInt(1, index);
+			// SQLの実行
+			try (
+					ResultSet rs = st.executeQuery();) {
+				// 結果の取得および表示
+				List<CustomersBean> list = new ArrayList<CustomersBean>();
+				// フォーマット指定
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					boolean isadmin = rs.getBoolean("isadmin");
+
+					CustomersBean bean = new CustomersBean(id, name, isadmin);
+					list.add(bean);
+				}
+				// カテゴリ一覧をListとして返す
+				return list;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new DAOException("レコードの取得に失敗しました。");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
 		}
 	}
 }

@@ -103,4 +103,53 @@ public class HotelDAO {
 			throw new DAOException("レコードの操作に失敗しました。");
 		}
 	}
+
+	/*
+	 * 宿情報表示（宿削除）
+	 */
+	public List<HotelsBean> findAllHotelsAdmin() throws DAOException {
+
+		// SQL文の作成
+		String sql = "select id,name  from hotels";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);
+				// SQLの実行
+				ResultSet rs = st.executeQuery();) {
+			// 結果の取得および表示
+			List<HotelsBean> list = new ArrayList<HotelsBean>();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				HotelsBean bean = new HotelsBean(id, name);
+				list.add(bean);
+			}
+			// カテゴリ一覧をListとして返す
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
+
+	/*
+	 * 宿情報削除
+	 */
+	public int deleteHotel(int id) throws DAOException {
+		String sql = "DELETE FROM hotels WHERE id = ?";
+		try (
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			st.setInt(1, id);
+			// SQLの実行
+			int rows = st.executeUpdate();
+			return rows;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+	}
 }

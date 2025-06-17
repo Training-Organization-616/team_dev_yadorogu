@@ -63,18 +63,33 @@ public class HotelServlet extends HttpServlet {
 					dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
 					List<HotelsBean> list = dao.findAll();
 					request.setAttribute("hotels", list);
-					gotoPage(request, response, "/customertop.jsp");
+					gotoPage(request, response, "/AdminServlet?action=");
 					//入力項目に空きがあるとき
 				} else {
 					request.setAttribute("mess", "正しく入力してください");
 					gotoPage(request, response, "/addHotel.jsp");
 				}
+
 				/*
 				 * 宿削除機能
 				 */
-			} else if (action.equals("delete")) {
 
+				//宿削除画面遷移
+			} else if (action.equals("delete")) {
+				HotelDAO dao = new HotelDAO();
+				List<HotelsBean> list = dao.findAllHotelsAdmin();
+				request.setAttribute("hotels", list);
+				gotoPage(request, response, "/deleteAdmin.jsp");
+				//宿削除
+			} else if (action.equals("deleteHotel")) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				HotelDAO dao = new HotelDAO();
+				dao.deleteHotel(id);
+				List<HotelsBean> list = dao.findAllHotelsAdmin();
+				request.setAttribute("hotels", list);
+				gotoPage(request, response, "/AdminServlet?action=");
 			}
+
 		} catch (
 
 		DAOException e) {

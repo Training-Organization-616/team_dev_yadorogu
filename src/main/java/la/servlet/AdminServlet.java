@@ -60,14 +60,21 @@ public class AdminServlet extends HttpServlet {
 				 */
 			} else if (action.equals("update")) {
 				int id = Integer.parseInt(request.getParameter("id"));
-				String isAdmin = request.getParameter("isAdmin");
-				boolean admin = Boolean.parseBoolean(isAdmin);
 				AdminDAO dao = new AdminDAO();
-				dao.updateCustomer(id, admin);
+				dao.updateCustomer(id);
 				List<CustomersBean> list = dao.findAll();
 				request.setAttribute("customers", list);
 				gotoPage(request, response, "/admintop.jsp");
 
+				/*
+				 * 会員検索
+				 */
+			} else if (action.equals("search")) {
+				int searchAdmin = Integer.parseInt(request.getParameter("searchAdmin"));
+				AdminDAO dao = new AdminDAO();
+				List<CustomersBean> list = dao.searchCustomer(searchAdmin);
+				request.setAttribute("customers", list);
+				gotoPage(request, response, "/admintop.jsp");
 			}
 		} catch (
 
