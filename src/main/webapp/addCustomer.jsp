@@ -15,7 +15,7 @@ ${message}
 	<input type="text" name="address" placeholder="住所"><br>
 	<input type="email" name="email" placeholder="メールアドレス"><br>
 	<input type="tel" name="tel" placeholder="電話番号"><br>
-	<input type="text" name="birthday" placeholder="生年月日"><br>
+	<input type="date" name="birthday" placeholder="生年月日"><br>
 	<input type="password" name="password" placeholder="パスワード"><br>
 	<input type="password" name="passwordCheck" placeholder="確認用パスワード"><br>
 	<button>新規登録</button>

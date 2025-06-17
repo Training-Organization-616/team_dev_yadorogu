@@ -14,7 +14,7 @@ ${message}
 	<input type="text" name="address" placeholder="住所" value="${user.address}"><br>
 	<input type="email" name="email" placeholder="メールアドレス" value="${user.email}"><br>
 	<input type="tel" name="tel" placeholder="電話番号" value="${user.tel}"><br>
-	<input type="text" name="birthday" placeholder="生年月日" value="${user.birthday}"><br>
+	<input type="date" name="birthday" placeholder="生年月日" value="${user.birthday}"><br>
 	<input type="password" name="password" placeholder="パスワード"><br>
 	<input type="password" name="passwordCheck" placeholder="確認用パスワード"><br>
 	<button onclick="MoveCheck(event);">変更</button>

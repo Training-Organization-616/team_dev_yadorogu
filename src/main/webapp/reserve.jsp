@@ -25,10 +25,16 @@
 				<td>チェックアウト時間：${hotel.checkout}</td>
 			</tr>
 			<tr>
-				<td>人数：<input type="text" name="persons"></td>
+				<td>
+					人数：<select name="persons">
+						<c:forEach var="i" begin="1" end="${hotel.maxperson}" step="1">
+							<option value="${i}">${i}</option>
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<td>チェックイン日時：<input type="text" name="date"></td>
+				<td>チェックイン日時：<input type="date" name="date"></td>
 			</tr>
 		</table>
 		お客様情報確認
