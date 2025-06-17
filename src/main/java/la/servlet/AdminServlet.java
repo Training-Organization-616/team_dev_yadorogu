@@ -94,9 +94,16 @@ public class AdminServlet extends HttpServlet {
 					request.setAttribute("customers", list);
 					gotoPage(request, response, "/admintop.jsp");
 				} else {
-					//IDが入力された場合、IDのよって検索
-					int searchIndex = Integer.parseInt(searchAdmin);
-					list = dao.searchCustomer(searchIndex);
+					try {
+						//IDが入力された場合、IDのよって検索
+						// 数字として解釈し検索
+						int searchIndex = Integer.parseInt(searchAdmin);
+						list = dao.searchCustomer(searchIndex);
+					} catch (NumberFormatException e) {
+						// 数字に変換できなかった場合のエラー処理
+						list = dao.findAll(); // 会員一覧を表示したまま
+						request.setAttribute("message", "IDは半角数字で入力してください");
+					}
 				}
 				request.setAttribute("customers", list);
 				gotoPage(request, response, "/admintop.jsp");
