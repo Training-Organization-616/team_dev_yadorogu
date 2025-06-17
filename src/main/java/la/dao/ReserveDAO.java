@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +45,17 @@ public class ReserveDAO {
 					ResultSet rs = st.executeQuery();) {
 				// 結果の取得および表示
 				HotelsBean bean = new HotelsBean();
+				// フォーマット指定
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				if (rs.next()) {
 					String name = rs.getString("name");
 					int category_id = rs.getInt("category_id");
-					String checkin = rs.getString("checkin");
-					String checkout = rs.getString("checkout");
+					//localtime型で取得
+					LocalTime checkinTime = rs.getTime("checkin").toLocalTime();
+					LocalTime checkoutTime = rs.getTime("checkout").toLocalTime();
+					// 文字列に変換
+					String checkin = checkinTime.format(formatter);
+					String checkout = checkoutTime.format(formatter);
 					int price = rs.getInt("price");
 					int maxperson = rs.getInt("maxperson");
 					bean = new HotelsBean(hotel_id, name, category_id, checkin, checkout, price, maxperson);
@@ -67,7 +75,7 @@ public class ReserveDAO {
 	//　会員の予約履歴を検索
 	public List<ReservationsBean> findByCustomer_id(int customer_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT r.id, h.name, h.price, r.persons, r.date FROM reservations r JOIN hotels h ON r.hotel_id = h.id WHERE r.customer_id = ? ORDER BY id";
+		String sql = "SELECT r.id, h.name, h.price, r.persons, r.date FROM reservations r JOIN hotels h ON r.hotel_id = h.id WHERE r.customer_id = ? ORDER BY id DESC LIMIT 5";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
