@@ -6,42 +6,43 @@
 <head>
 <meta charset="UTF-8">
 <title>宿新規登録</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/admin.css">
 </head>
 <body>
-<header>
-		
-			<c:choose>
-				<c:when test="${not empty user}">
-				
-					<h3>
-						管理者用ページ
-					</h3>
+
+<header class="header-glass">
+ <div class="header-top">
+  <div class="logo">
+    <a href="/team_dev_yadorogu/AdminServlet?action=">やどログ</a>
+  </div>
+
+  <div class="page-title">
+    <h2>管理者用ページ</h2>
+  <c:choose>
+    <c:when test="${not empty user}">
+    <div class="li">
+      <a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a>
+      <a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a>
+      </div>
+    </c:when>
+  </c:choose>
+  </div>
+</div>
+
+<nav class="header-bottom">
+  <a href="/team_dev_yadorogu/AdminServlet?action=">会員一覧</a>
+  <a href="/team_dev_yadorogu/addHotel.jsp">宿情報追加</a>
+  <a href="/team_dev_yadorogu/HotelServlet?action=delete">宿削除</a>
+</nav>
+
+</header>
 
 
-					<a href="/team_dev_yadorogu/LoginServlet?action=logout" >ログアウト</a>
-                    <a href="/team_dev_yadorogu/">情報変更</a>
-				</c:when>
-				<c:otherwise>
 
-
-					<a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a>
-
-				</c:otherwise>
-
-			</c:choose>
-			
-			<a href="/team_dev_yadorogu/AdminServlet?action=">会員一覧</a>
-			<a href="/team_dev_yadorogu/addHotel.jsp">宿情報追加</a>
-			<a href="/team_dev_yadorogu/HotelServlet?action=delete">宿削除</a>
-			
-			
-	</header>
-
-	<h1>やどログ</h1>
-	<h2>管理者用ページ</h2>
 	
-	<!-- 廣瀬修正点 -->
-	<a href="#">ログアウト</a>
+	
+	
 	
 	<br>
 	<!-- 登録フォーム表示 -->

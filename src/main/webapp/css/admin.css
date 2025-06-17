@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+body {
+  background-color: #A89B8C; /* 明るめのグレージュ系：落ち着き＋温かみ */
+  color: #4A3F35;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* ヘッダー背景全体（ガラス風） */
+.header-glass {
+  background: rgba(86, 75, 63, 0.7);           /* #564B3F 半透明 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #C6A57A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+/* 上段のレイアウト（ロゴ・タイトル・リンク） */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(198, 165, 122, 0.2);
+  background-color: rgba(86, 75, 63, 0.85);
+  flex-wrap: wrap;
+ 
+}
+
+/* やどログロゴ */
+.logo a {
+  font-size: 28px;
+  font-weight: bold;
+  color: #C6A57A;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+}
+.logo a:hover {
+  color: #FFF1D0;
+}
+
+/* タイトル・ユーザー名 */
+.page-title h2,
+.user-info p{
+  margin-left: auto;
+  color: #C6A57A;
+  font-size: 18px;
+  font-weight: 500;
+}
+.page-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 必要に応じて center に変更可 */
+  gap: 8px; /* 上下間のスペース調整 */
+}
+.li{
+	display: flex;
+}
+
+/* 下段のナビゲーション */
+.header-bottom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px 0;
+  background-color: rgba(86, 75, 63, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 上段・下段共通のリンクスタイル */
+.header-top a,
+.header-bottom a {
+  text-decoration: none;
+  color: #C6A57A;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.header-top a:hover,
+.header-bottom a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFF1D0;
+}
+
+
+
