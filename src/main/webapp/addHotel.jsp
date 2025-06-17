@@ -46,8 +46,13 @@
 	
 	<br>
 	<!-- 登録フォーム表示 -->
+	<div class="center">
 	<label>宿情報登録</label>
-	<p>${mess}</p>
+	</div>
+	<br>
+	<div class="center">
+	<strong class="mes">${mess}</strong>
+	</div>
 	<form action="HotelServlet" method="post">
 	<table>
 		<tr><th>宿名</th>
@@ -78,8 +83,13 @@
 		</tr>	
 		</table>
 		<!-- クリックしたらダイアログ表示 -->
-		<button onclick="MoveCheck(event);">登録</button>
+		
+		<br>
+		
+		<div class="center">
+		<button onclick="MoveCheck(event);" class="regist"><span>登録</span></button>
 		<input type="hidden" name="action" value="addHotel">
+		</div>
 	</form>
 	
 <script type="text/javascript">

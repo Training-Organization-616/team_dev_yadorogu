@@ -37,13 +37,25 @@
 </nav>
 
 </header>
-
-	
+<br>
+<br>
+<div class="center">
+<label>会員一覧</label>
+</div>
+	<div class="search">
 	<form action="/team_dev_yadorogu/AdminServlet?action=search" method="post">
-		<input type="text" name="searchAdmin">
+		<input type="text" name="searchAdmin" placeholder="idを入力">
 		<button>検索</button>
 	</form>
-	<table border="1">
+	</div>
+	<br>
+	<br>
+	
+	<div class="mess">
+	<strong class="mes">${message}</strong>
+	</div>
+	
+	<table>
 		<tr>
 			<th>ID</th>
 			<th>名前</th>

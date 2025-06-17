@@ -37,8 +37,11 @@
 
 </header>
 	
-
-	<table border="1">
+<br>
+<div class="center">
+<label>宿削除</label>
+</div>
+	<table >
 		<tr>
 			<th>ID</th>
 			<th>名前</th>

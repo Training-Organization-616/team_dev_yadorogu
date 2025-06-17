@@ -110,4 +110,138 @@ body {
 }
 
 
+/*検索バーの中央寄せ*/
+.search{
+	text-align:center;
+}
 
+/*メッセージのスタイル*/
+.mess{
+		text-align:center!important;
+}
+.mes{
+	
+	display: inline-block;
+	  border-bottom: 2px solid #ff3333;
+	  color: white;
+	  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+	  font-size: 150%;
+	  padding-bottom: 2px;
+}
+
+/*宿情報追加テーブルのスタイル*/
+
+table{
+  width: 100%;
+  table-layout:fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0 auto;           /* 中央寄せ */
+    padding: 0 20px;          /* 左右に20pxの余白 */
+    max-width: 1000px;
+}
+
+
+
+
+
+table th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+table th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #7A6957;
+}
+
+table th {
+  text-align: center;
+  color: #FFF1D0; /* 見出しの文字を明るく */
+  background: linear-gradient(#7A6957, #564B3F);
+  border-left: 1px solid #7A6957;
+  border-top: 1px solid #7A6957;
+  border-bottom: 1px solid #7A6957;
+  box-shadow: 0px 1px 1px rgba(255,255,255,0.2) inset;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  width: 25%;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+table td {
+  text-align: center;
+  background-color: #FAF6F2; /* 明るい背景でコントラスト向上 */
+  border-left: 1px solid #C6A57A;
+  border-bottom: 1px solid #C6A57A;
+  box-shadow: 0px -3px 5px 1px #f3ede6 inset;
+  color: #2F2F2F; /* 濃いめのグレーで視認性UP */
+  width: 25%;
+  padding: 10px 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+table td:last-child {
+  border-right: 1px solid #C6A57A;
+}
+
+table tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+table tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
+
+button.regist {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1.2rem;     /* ← 小さく！ */
+  border: 2px solid #000;
+  border-radius: 0;
+  background: #fff;
+  font-size: 14px;            /* ← テキストサイズも縮小 */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.regist:before,
+button.regist:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border-top: 2px dotted #000;
+  transition: all 0.3s ease;
+}
+
+button.regist:before {
+  top: 4px;
+}
+
+button.regist:after {
+  bottom: 4px;
+}
+
+button.regist:hover:before {
+  top: -3px;
+  background: #000;
+}
+
+button.regist:hover:after {
+  bottom: -3px;
+  background: #000;
+}
+
+.center{
+	text-align: center;
+}
+label {
+  font-size: 120%;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
