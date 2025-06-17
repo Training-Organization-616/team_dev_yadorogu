@@ -22,7 +22,7 @@
     <c:when test="${not empty user}">
     <div class="li">
       <a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a>
-      <a href="/team_dev_yadorogu/">情報変更</a>
+      <a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a>
       </div>
     </c:when>
   </c:choose>
