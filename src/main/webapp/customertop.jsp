@@ -6,34 +6,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-<header>
-		
-			<c:choose>
-				<c:when test="${not empty user}">
-				
-					<h3>
-						こんにちは、<b>${user.name}</b>さん
-					</h3>
 
 
-					<a href="/team_dev_yadorogu/LoginServlet?action=logout" >ログアウト</a>
-                    <a href="/team_dev_yadorogu/">情報変更</a>
-				</c:when>
-				<c:otherwise>
+<div class="header-glass">
+  <div class="container">
+    <div class="logo">やどログ</div> 
+
+    <nav class="nav-wrapper">
+      <ul class="nav-links">
+        <c:choose>
+          <c:when test="${not empty user}">
+            <li class="greeting">こんにちは、<b>${user.name}</b>さん</li>
+            <li><a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a></li>
+            <li><a href="/team_dev_yadorogu/">情報変更</a></li>
+          </c:when>
+          <c:otherwise>
+            <li><a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a></li>
+          </c:otherwise>
+        </c:choose>
+        <li><a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
 
 
-					<a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a>
 
-				</c:otherwise>
 
-			</c:choose>
-			
-	</header>
-<h1>やどログ</h1>
 
-<a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a>
 
 <c:forEach items="${hotels}" var="hotels">
  <form action="/team_dev_yadorogu/ReserveServlet" method="post">
