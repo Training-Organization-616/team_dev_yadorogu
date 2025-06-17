@@ -8,6 +8,34 @@
 <title>宿新規登録</title>
 </head>
 <body>
+<header>
+		
+			<c:choose>
+				<c:when test="${not empty user}">
+				
+					<h3>
+						管理者用ページ
+					</h3>
+
+
+					<a href="/team_dev_yadorogu/LoginServlet?action=logout" >ログアウト</a>
+                    <a href="/team_dev_yadorogu/">情報変更</a>
+				</c:when>
+				<c:otherwise>
+
+
+					<a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a>
+
+				</c:otherwise>
+
+			</c:choose>
+			
+			<a href="/team_dev_yadorogu/AdminServlet?action=">会員一覧</a>
+			<a href="/team_dev_yadorogu/addHotel.jsp">宿情報追加</a>
+			<a href="/team_dev_yadorogu/HotelServlet?action=delete">宿削除</a>
+			
+			
+	</header>
 
 	<h1>やどログ</h1>
 	<h2>管理者用ページ</h2>
