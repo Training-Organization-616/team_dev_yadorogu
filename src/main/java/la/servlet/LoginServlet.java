@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				LoginDAO dao = new LoginDAO();
 				CustomersBean bean = dao.login(email, password);
-				if (bean.equals(null)) {
+				if (bean == null) {
 					request.setAttribute("message", "メールアドレス又はパスワードが一致しません");
 					gotoPage(request, response, "/login.jsp");
 					return;

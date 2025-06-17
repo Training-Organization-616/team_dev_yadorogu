@@ -19,6 +19,26 @@ body {
   z-index: 1000;
 }
 
+.header-glass .logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #C6A57A;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-glass .logo::before {
+  content: "◆";
+  font-size: 20px;
+  color: #C6A57A;
+}
+.header-glass .logo:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 5px 10px rgba(198, 165, 122, 0.4));
+}
+
 /* 上段のレイアウト（ロゴ・タイトル・リンク） */
 .header-top {
   display: flex;
