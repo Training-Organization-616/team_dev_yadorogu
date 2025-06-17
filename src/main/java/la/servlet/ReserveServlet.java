@@ -36,14 +36,14 @@ public class ReserveServlet extends HttpServlet {
 				// パラメータなしの場合は予約確認画面を表示
 				HttpSession session = request.getSession(false);
 				if(session == null) {
-					request.setAttribute("message", "セッションが切れています。");
-					gotoPage(request, response, "errInternal.jsp");
+					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
+					gotoPage(request, response, "login.jsp");
 					return;
 				}
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
 				if(customer == null) {
-					request.setAttribute("message", "ログインしていません。");
-					gotoPage(request, response, "errInternal.jsp");
+					request.setAttribute("message", "ログインして下さい。");
+					gotoPage(request, response, "login.jsp");
 					return;
 				}
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
@@ -72,14 +72,14 @@ public class ReserveServlet extends HttpServlet {
 			} else if (action.equals("history")) {
 				HttpSession session = request.getSession(false);
 				if(session == null) {
-					request.setAttribute("message", "セッションが切れています。");
-					gotoPage(request, response, "errInternal.jsp");
+					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
+					gotoPage(request, response, "login.jsp");
 					return;
 				}
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
 				if(customer == null) {
-					request.setAttribute("message", "ログインしていません。");
-					gotoPage(request, response, "errInternal.jsp");
+					request.setAttribute("message", "ログインして下さい。");
+					gotoPage(request, response, "login.jsp");
 					return;
 				}
 				ReserveDAO dao = new ReserveDAO();

@@ -32,6 +32,7 @@ public class CustomersBean {
 		this.email = email;
 		this.birthday = birthday;
 		this.membershipdate = membershipdate;
+		this.password = password;
 		this.isAdmin = isadmin;
 	}
 
