@@ -63,15 +63,19 @@ public class AdminDAO {
 	 * 会員の削除
 	 */
 	public int deleteCustomer(int id) throws DAOException {
-		String sql = "DELETE FROM customers WHERE id = ?";
+		String sql1 = "DELETE FROM reservations WHERE customer_id = ?";
+		String sql2 = "DELETE FROM customers WHERE id = ?";
 		try (
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
-				PreparedStatement st = con.prepareStatement(sql);) {
-			st.setInt(1, id);
+				PreparedStatement st1 = con.prepareStatement(sql1);
+				PreparedStatement st2 = con.prepareStatement(sql2);) {
+			st1.setInt(1, id);
+			st2.setInt(1, id);
 			// SQLの実行
-			int rows = st.executeUpdate();
-			return rows;
+			st1.executeUpdate();
+			int rows2 = st2.executeUpdate();
+			return rows2;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
