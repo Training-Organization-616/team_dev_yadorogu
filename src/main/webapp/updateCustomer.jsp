@@ -12,23 +12,12 @@
 <body>
 <div class="header-glass">
   <div class="container">
-    <a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
-
-    <nav class="nav-wrapper">
-      <ul class="nav-links">
-        <c:choose>
-          <c:when test="${not empty user}">
-            <li class="greeting">こんにちは、<b>${user.name}</b>さん</li>
-            <li><a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a></li>
-            <li><a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a></li>
-          </c:when>
-          <c:otherwise>
-            <li><a href="/team_dev_yadorogu/LoginServlet?action=">ログイン</a></li>
-          </c:otherwise>
-        </c:choose>
-        <li><a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a></li>
-      </ul>
-    </nav>
+  	<c:if test="${user.admin}">
+    	<a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
+	</c:if>
+    <c:if test="${not user.admin}">
+    	<a href="/team_dev_yadorogu/AdminServlet?action=" class="logo">やどログ</a>
+	</c:if>
   </div>
 </div>
 
