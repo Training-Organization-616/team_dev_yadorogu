@@ -79,7 +79,7 @@ public class HotelServlet extends HttpServlet {
 				HotelDAO dao = new HotelDAO();
 				List<HotelsBean> list = dao.findAllHotelsAdmin();
 				request.setAttribute("hotels", list);
-				gotoPage(request, response, "/deleteAdmin.jsp");
+				gotoPage(request, response, "delteHotel.jsp");
 				//宿削除
 			} else if (action.equals("deleteHotel")) {
 				int id = Integer.parseInt(request.getParameter("id"));
