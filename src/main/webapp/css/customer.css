@@ -323,3 +323,15 @@ button.out:hover {
 	text-align: right;         /* 横方向に右寄せ */
 	 padding: 2rem; 
 }
+.mess{
+		text-align:center!important;
+}
+.mes{
+	
+	display: inline-block;
+	  border-bottom: 2px solid #ff3333;
+	  color: white;
+	  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+	  font-size: 150%;
+	  padding-bottom: 2px;
+}
