@@ -54,19 +54,20 @@ public class ReserveServlet extends HttpServlet {
 
 			} else if (action.equals("add")) {
 				// 
-				String personsString = request.getParameter("persons");
+				int persons = Integer.parseInt(request.getParameter("persons"));
 				String date = request.getParameter("date");
-				if(personsString == null || personsString.length() == 0 || date == null || date.length() == 0) {
-					request.setAttribute("message", "人数とチェックイン日時が入力されていません");
-					gotoPage(request, response, "errInternal.jsp");
+				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
+				ReserveDAO dao = new ReserveDAO();
+				if(date == null || date.length() == 0) {
+					HotelsBean bean = dao.findByHotel_id(hotel_id);
+					request.setAttribute("hotel", bean);
+					request.setAttribute("message", "チェックイン日時が入力されていません");
+					gotoPage(request, response, "reserve.jsp");
 					return;
 				}
-				int persons = Integer.parseInt(personsString);
-				ReserveDAO dao = new ReserveDAO();
-				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				HttpSession session = request.getSession();
-				CustomersBean bean = (CustomersBean)session.getAttribute("user");
-				dao.addReserve(hotel_id, bean.getId(), persons, date);
+				CustomersBean customer = (CustomersBean)session.getAttribute("user");
+				dao.addReserve(hotel_id, customer.getId(), persons, date);
 				gotoPage(request, response, "reserveCommit.jsp");
 
 			} else if (action.equals("history")) {

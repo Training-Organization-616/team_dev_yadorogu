@@ -50,6 +50,12 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
+				CustomerDAO dao = new CustomerDAO();
+				if (dao.findByEmail(email)) {
+					request.setAttribute("message", "このメールアドレスはすでに使用されています");
+					gotoPage(request, response, "addCustomer.jsp");
+					return;
+				}
 				if(password.contains("\s")) {
 					request.setAttribute("message", "パスワードに空白が含まれています");
 					gotoPage(request, response, "addCustomer.jsp");
@@ -60,7 +66,6 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
-				CustomerDAO dao = new CustomerDAO();
 				dao.addCustomer(customerName, address, tel, email, birthday, password);
 				gotoPage(request, response, "/login.jsp");
 
@@ -70,6 +75,12 @@ public class CustomerServlet extends HttpServlet {
 
 			} else if (action.equals("updateCustomer")) {
 				// 
+				HttpSession session = request.getSession(false);
+				if (session == null) {
+					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
+					gotoPage(request, response, "login.jsp");
+					return;
+				}
 				String customerName = request.getParameter("customerName").strip();
 				String address = request.getParameter("address").strip();
 				String tel = request.getParameter("tel").strip();
@@ -85,6 +96,12 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
+				CustomerDAO dao = new CustomerDAO();
+				if (dao.findByEmail(email)) {
+					request.setAttribute("message", "このメールアドレスはすでに使用されています");
+					gotoPage(request, response, "updateCustomer.jsp");
+					return;
+				}
 				if(password.contains("\s")) {
 					request.setAttribute("message", "パスワードに空白が含まれています");
 					gotoPage(request, response, "updateCustomer.jsp");
@@ -94,17 +111,10 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("message", "パスワードが一致しません");
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
-				}
-				HttpSession session = request.getSession(false);
-				if (session == null) {
-					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
-					gotoPage(request, response, "login.jsp");
-					return;
-				}
+				}	
 				CustomersBean customer = (CustomersBean) session.getAttribute("user");
 				CustomersBean bean = new CustomersBean(customer.getId(), customerName, address, tel, email, birthday,
 						customer.getMembershipdate(), password, customer.isAdmin());
-				CustomerDAO dao = new CustomerDAO();
 				dao.updateCustomer(bean);
 				session.setAttribute("user", bean);
 				if (customer.isAdmin()) {
