@@ -35,26 +35,27 @@
 
 <a href="/team_dev_yadorogu/ReserveServlet?action=history">予約履歴</a>
 
- <form action="team_dev_yadorogu/ReserveServlet?action=add" method="post">
-    <c:forEach items="${hotels}" var="hotels">
+<c:forEach items="${hotels}" var="hotels">
+ <form action="/team_dev_yadorogu/ReserveServlet" method="post">
     <input type="hidden" name="hotel_id" value="${hotels.id}">
+    	${hotels.id}::
         ${hotels.name}
          1泊：${hotels.price}
                
                     <c:choose>
-                        <c:when test="${hotels.category_id==0}">シティホテル</c:when>
-                        <c:when test="${hotels.category_id==1}">リゾートホテル</c:when>
-                        <c:when test="${hotels.category_id==2}">ビジネスホテル</c:when>
-                        <c:when test="${hotels.category_id==3}">旅館</c:when>
-                        <c:when test="${hotels.category_id==4}">民宿</c:when>
-                        <c:when test="${hotels.category_id==5}">ペンション</c:when>
+                        <c:when test="${hotels.category_id==1}">シティホテル</c:when>
+                        <c:when test="${hotels.category_id==2}">リゾートホテル</c:when>
+                        <c:when test="${hotels.category_id==3}">ビジネスホテル</c:when>
+                        <c:when test="${hotels.category_id==4}">旅館</c:when>
+                        <c:when test="${hotels.category_id==5}">民宿</c:when>
+                        <c:when test="${hotels.category_id==6}">ペンション</c:when>
                     </c:choose>
              
           チェックイン時間：${hotels.checkin}
         チェックアウト時間：${hotels.checkout}
         <button>予約</button>
-    </c:forEach>
-</form>
+		</form>
+	</c:forEach>
 
 </body>
 </html>

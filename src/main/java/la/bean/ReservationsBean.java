@@ -7,6 +7,8 @@ public class ReservationsBean {
 	private int customer_id;
 	private int persons;
 	private String date;
+	private String hotel_name;
+	private int price;
 
 	//コンストラクタ
 	public ReservationsBean() {
@@ -17,6 +19,14 @@ public class ReservationsBean {
 		this.id = id;
 		this.customer_id = customer_id;
 		this.hotel_id = hotel_id;
+		this.persons = persons;
+		this.date = date;
+	}
+	
+	public ReservationsBean(int id, String hotel_name, int price, int persons, String date) {
+		this.id = id;
+		this.hotel_name = hotel_name;
+		this.price = price;
 		this.persons = persons;
 		this.date = date;
 	}
@@ -60,6 +70,22 @@ public class ReservationsBean {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getHotel_name() {
+		return hotel_name;
+	}
+
+	public void setHotel_name(String hotel_name) {
+		this.hotel_name = hotel_name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }
