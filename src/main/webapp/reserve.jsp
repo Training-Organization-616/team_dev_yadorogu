@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,14 +34,14 @@
 </div>
 <br>
 	<form action="/team_dev_yadorogu/ReserveServlet?action=add" method="post">
-		<div class="center"><label>宿予約${hotel.id}</label></div>
+		<div class="center"><label>宿予約</label></div>
 		<input type="hidden" name="hotel_id" value="${hotel.id}">
 		<table>
 			<tr><th>ホテル名</th>
 				<td>${hotel.name}</td>
 			</tr>
 			<tr><th>料金</th>
-				<td>${hotel.price}円</td>
+				<td><fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円</td>
 			</tr>
 			<tr><th>チェックイン時間</th>
 				<td>${hotel.checkin}</td>
