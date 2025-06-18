@@ -67,6 +67,7 @@ public class CustomerServlet extends HttpServlet {
 					return;
 				}
 				dao.addCustomer(customerName, address, tel, email, birthday, password);
+				request.setAttribute("message", "新規登録が完了しました。ログインしてください。");
 				gotoPage(request, response, "/login.jsp");
 
 			} else if (action.equals("update")) {
