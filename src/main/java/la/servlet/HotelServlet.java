@@ -69,18 +69,28 @@ public class HotelServlet extends HttpServlet {
 						gotoPage(request, response, "/addHotel.jsp");
 						return; // 処理をここで止める
 					}
-					//カテゴリーID,価格、最大宿泊可能人数を整数化
+					//カテゴリーIDを整数化
 					int cid = Integer.parseInt(categoryId);
-					int pri = Integer.parseInt(price);
-					int max = Integer.parseInt(maxpersons);
-					//"addHotel"で宿の新規登録
-					dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
+					//料金、最大宿泊人数に半角数字が入力されているかのチェック
+					try {
+						int pri = Integer.parseInt(price);
+						int max = Integer.parseInt(maxpersons);
+						//０以下だったときは登録させない
+						if (pri <= 0 || max <= 0) {
+							request.setAttribute("mess", "料金、最大宿泊人数は0以上で入力してください");
+							gotoPage(request, response, "/addHotel.jsp");
+							return; // 処理をここで止める
+						}
+						//"addHotel"で宿の新規登録
+						dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
+					} catch (NumberFormatException e) {
+						request.setAttribute("mess", "料金、最大宿泊人数は半角数字で入力してください");
+						gotoPage(request, response, "/addHotel.jsp");
+					}
 					List<HotelsBean> list = dao.findAll();
 					request.setAttribute("hotels", list);
 					gotoPage(request, response, "/AdminServlet?action=");
 					//重複した宿名が存在しているとき
-
-					//入力項目に空きがあるとき
 				} else {
 					request.setAttribute("mess", "正しく入力してください");
 					gotoPage(request, response, "/addHotel.jsp");

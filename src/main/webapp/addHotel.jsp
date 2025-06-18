@@ -89,7 +89,7 @@
 				</select></td></tr>
 				<tr>
 			<th>料金</th>
-				<td><input type="number" name="price"></td>
+				<td><input type="text" name="price"></td>
 				</tr><tr>
 			<th>チェックイン</th>
 				<td><input type="time" name="checkin"></td>
@@ -98,7 +98,7 @@
 				<td><input type="time" name="checkout"></td>
 				</tr><tr>
 			<th>最大宿泊人数</th>
-				<td><input type="number" name="maxpersons"></td>
+				<td><input type="text" name="maxpersons"></td>
 		</tr>	
 		</table>
 		<!-- クリックしたらダイアログ表示 -->
