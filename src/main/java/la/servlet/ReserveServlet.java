@@ -51,6 +51,7 @@ public class ReserveServlet extends HttpServlet {
 				ReserveDAO dao = new ReserveDAO();
 				HotelsBean bean = dao.findByHotel_id(hotel_id);
 				request.setAttribute("hotel", bean);
+				// 今日の日付を取得
 				LocalDate today = LocalDate.now();
 				request.setAttribute("today", today);
 				gotoPage(request, response, "reserve.jsp");

@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<th>生年月日</th>
-				<td><input type="date" name="birthday" placeholder="生年月日"></td>
+				<td><input type="date" max="${today}" name="birthday" placeholder="生年月日"></td>
 			</tr>
 			<tr>
 				<th>パスワード</th>

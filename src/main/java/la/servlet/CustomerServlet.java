@@ -1,6 +1,7 @@
 package la.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,12 +26,16 @@ public class CustomerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		// 今日の日付を取得
+		LocalDate today = LocalDate.now();
 
 		try {
 			// パラメータの解析
 			String action = request.getParameter("action");
 			if (action == null || action.length() == 0) {
 				// パラメータなしの場合は予約確認画面を表示
+				// 今日の日付を送る
+				request.setAttribute("today", today);
 				gotoPage(request, response, "addCustomer.jsp");
 
 			} else if (action.equals("add")) {
@@ -47,22 +52,30 @@ public class CustomerServlet extends HttpServlet {
 						birthday == null || birthday.length() == 0 || password == null || password.length() == 0 ||
 						passwordCheck == null || passwordCheck.length() == 0) {
 					request.setAttribute("message", "入力されていない項目があります");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
 				CustomerDAO dao = new CustomerDAO();
 				if (dao.findByEmail(email)) {
 					request.setAttribute("message", "このメールアドレスはすでに使用されています");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
 				if(password.contains("\s")) {
 					request.setAttribute("message", "パスワードに空白が含まれています");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
 				if (!password.equals(passwordCheck)) {
 					request.setAttribute("message", "パスワードが一致しません");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
@@ -72,6 +85,8 @@ public class CustomerServlet extends HttpServlet {
 
 			} else if (action.equals("update")) {
 				// 
+				// 今日の日付を送る
+				request.setAttribute("today", today);
 				gotoPage(request, response, "updateCustomer.jsp");
 
 			} else if (action.equals("updateCustomer")) {
@@ -94,22 +109,30 @@ public class CustomerServlet extends HttpServlet {
 						birthday == null || birthday.length() == 0 || password == null || password.length() == 0 ||
 						passwordCheck == null || passwordCheck.length() == 0) {
 					request.setAttribute("message", "入力されていない項目があります");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
 				CustomerDAO dao = new CustomerDAO();
 				if (dao.findByEmail(email)) {
 					request.setAttribute("message", "このメールアドレスはすでに使用されています");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
 				if(password.contains("\s")) {
 					request.setAttribute("message", "パスワードに空白が含まれています");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
 				if (!password.equals(passwordCheck)) {
 					request.setAttribute("message", "パスワードが一致しません");
+					// 今日の日付を送る
+					request.setAttribute("today", today);
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}	
