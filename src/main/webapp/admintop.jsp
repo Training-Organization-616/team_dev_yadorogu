@@ -63,12 +63,12 @@
 <div class="center">
 <label>${mess}</label>
 </div>
-	<div class="search">
-	<form action="/team_dev_yadorogu/AdminServlet?action=search" method="post">
-		<input type="text" name="searchAdmin" placeholder="idを入力">
-		<button>検索</button>
-	</form>
-	</div>
+	<div class="search-outside">
+  <form action="/team_dev_yadorogu/AdminServlet?action=search" method="post">
+    <input type="text" name="searchAdmin" placeholder="idを入力">
+    <button>検索</button>
+  </form>
+</div>
 	<br>
 	<br>
 	
