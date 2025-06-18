@@ -11,35 +11,54 @@
 </head>
 <body>
 
+
 <header class="header-glass">
- <div class="header-top">
-  <div class="logo">
-    <a href="/team_dev_yadorogu/AdminServlet?action=">やどログ</a>
+  <div class="header-top">
+    <!-- ロゴ -->
+    <div class="logo">
+      <a href="/team_dev_yadorogu/AdminServlet?action=">やどログ</a>
+    </div>
+
+    <!-- タイトルとリンク -->
+    <div class="page-title">
+      <h2>管理者用ページ</h2>
+      <c:choose>
+        <c:when test="${not empty user}">
+          <div class="li">
+            <a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a>
+            <a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a>
+          </div>
+        </c:when>
+      </c:choose>
+    </div>
+
+    <!-- ▼ 下端中央ボタン（header-top内） -->
+    <div class="accordion-button-center">
+      <button class="accordion-toggle">▼ メニューを開く</button>
+    </div>
   </div>
 
-  <div class="page-title">
-    <h2>管理者用ページ</h2>
-  <c:choose>
-    <c:when test="${not empty user}">
-    <div class="li">
-      <a href="/team_dev_yadorogu/LoginServlet?action=logout">ログアウト</a>
-      <a href="/team_dev_yadorogu/CustomerServlet?action=update">情報変更</a>
-      </div>
-    </c:when>
-  </c:choose>
+  <!-- アコーディオン展開メニュー -->
+  <div class="accordion-content">
+    <nav class="header-bottom">
+      <a href="/team_dev_yadorogu/AdminServlet?action=">会員一覧</a>
+      <a href="/team_dev_yadorogu/addHotel.jsp">宿情報追加</a>
+      <a href="/team_dev_yadorogu/HotelServlet?action=delete">宿削除</a>
+    </nav>
   </div>
-</div>
-
-<nav class="header-bottom">
-  <a href="/team_dev_yadorogu/AdminServlet?action=">会員一覧</a>
-  <a href="/team_dev_yadorogu/addHotel.jsp">宿情報追加</a>
-  <a href="/team_dev_yadorogu/HotelServlet?action=delete">宿削除</a>
-</nav>
-
 </header>
 
+<!-- JavaScript：開閉処理 -->
+<script>
+  const toggle = document.querySelector('.accordion-toggle');
+  const content = document.querySelector('.accordion-content');
 
-
+  toggle.addEventListener('click', () => {
+    const isVisible = content.style.display === 'block';
+    content.style.display = isVisible ? 'none' : 'block';
+    toggle.textContent = isVisible ? '▼ メニューを開く' : '▲ メニューを閉じる';
+  });
+</script>
 	
 	
 	

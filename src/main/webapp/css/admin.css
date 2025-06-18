@@ -9,8 +9,10 @@ body {
 
 
 /* ヘッダー背景全体（ガラス風） */
+/* ヘッダーガラス風 */
+/* ヘッダー全体 */
 .header-glass {
-  background: rgba(86, 75, 63, 0.7);           /* #564B3F 半透明 */
+  background: rgba(86, 75, 63, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: #C6A57A;
@@ -19,15 +21,16 @@ body {
   z-index: 1000;
 }
 
+/* ロゴ */
 .header-glass .logo {
   font-size: 26px;
   font-weight: 700;
   color: #C6A57A;
   text-decoration: none;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: all 0.3s ease;
 }
 .header-glass .logo::before {
   content: "◆";
@@ -39,19 +42,17 @@ body {
   filter: drop-shadow(0 5px 10px rgba(198, 165, 122, 0.4));
 }
 
-/* 上段のレイアウト（ロゴ・タイトル・リンク） */
+/* 上段 */
 .header-top {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
+  align-items: flex-start;
+  padding: 20px;
   border-bottom: 1px solid rgba(198, 165, 122, 0.2);
   background-color: rgba(86, 75, 63, 0.85);
   flex-wrap: wrap;
- 
 }
-
-/* やどログロゴ */
 .logo a {
   font-size: 28px;
   font-weight: bold;
@@ -63,37 +64,23 @@ body {
 .logo a:hover {
   color: #FFF1D0;
 }
-
-/* タイトル・ユーザー名 */
-.page-title h2,
-.user-info p{
-  margin-left: auto;
+.page-title h2 {
   color: #C6A57A;
   font-size: 18px;
   font-weight: 500;
 }
 .page-title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* 必要に応じて center に変更可 */
-  gap: 8px; /* 上下間のスペース調整 */
+	margin-left: auto; /* ← これで右寄せ */
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-end; /* ← テキスト右寄せ */
+	  gap: 8px;
 }
-.li{
-	display: flex;
+.li {
+  display: flex;
 }
 
-/* 下段のナビゲーション */
-.header-bottom {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 10px 0;
-  background-color: rgba(86, 75, 63, 0.7);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* 上段・下段共通のリンクスタイル */
+/* 共通リンク */
 .header-top a,
 .header-bottom a {
   text-decoration: none;
@@ -108,6 +95,47 @@ body {
   background-color: rgba(255, 255, 255, 0.15);
   color: #FFF1D0;
 }
+
+/* ▼ ボタン中央下配置 */
+.accordion-button-center {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.accordion-toggle {
+  background: none;
+  color: inherit;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.accordion-toggle:hover {
+  text-decoration: underline;
+}
+
+/* メニュー展開 */
+.accordion-content {
+	display: none;
+	  padding: 10px 20px;
+	  background-color: rgba(86, 75, 63, 0.05); /* ← 第一ヘッダー系の色を超薄く */
+	  border-top: 1px solid rgba(86, 75, 63, 0.08);
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px 0;
+  background-color: transparent; /* こちら側は継承に任せてOK */
+    border-top: none;
+}
+
+
+
 
 
 /*検索バーの中央寄せ*/
