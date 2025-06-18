@@ -65,12 +65,20 @@ public class ReserveServlet extends HttpServlet {
 				if(date == null || date.length() == 0) {
 					HotelsBean bean = dao.findByHotel_id(hotel_id);
 					request.setAttribute("hotel", bean);
-					request.setAttribute("message", "チェックイン日時が入力されていません");
+					request.setAttribute("message", "チェックイン日が入力されていません");
 					gotoPage(request, response, "reserve.jsp");
 					return;
 				}
 				HttpSession session = request.getSession();
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
+				if (dao.findByCustomer_idAndDate(customer.getId(), date)) {
+					HotelsBean bean = dao.findByHotel_id(hotel_id);
+					request.setAttribute("hotel", bean);
+					request.setAttribute("message", "その日はすでに予約されています");
+					gotoPage(request, response, "reserve.jsp");
+					return;
+				}
+				
 				dao.addReserve(hotel_id, customer.getId(), persons, date);
 				gotoPage(request, response, "reserveCommit.jsp");
 

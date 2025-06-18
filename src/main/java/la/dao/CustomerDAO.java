@@ -25,7 +25,7 @@ public class CustomerDAO {
 		}
 	}
 
-	//　ホテルをIDで検索
+	//　同じemailの人がいるか検索
 	public boolean findByEmail(String email) throws DAOException {
 		// SQL文の作成
 		String sql = "SELECT * FROM customers WHERE email = ?";
@@ -56,7 +56,7 @@ public class CustomerDAO {
 		}
 	}
 
-	// 予約情報を追加
+	// 会員情報を追加
 	public void addCustomer(String customrName, String address, String tel, String email, String birthday,
 			String password) throws DAOException {
 		// SQL文の作成
@@ -82,7 +82,7 @@ public class CustomerDAO {
 		}
 	}
 
-	// 予約情報を追加
+	// 会員情報を変更
 	public void updateCustomer(CustomersBean bean) throws DAOException {
 		// SQL文の作成
 		String sql = "UPDATE customers SET name=?, address=?, tel=?, email=?, birthday=?::DATE, password=?  WHERE id=?";
@@ -108,7 +108,7 @@ public class CustomerDAO {
 		}
 	}
 
-	// 予約情報を追加
+	// 会員情報を削除
 	public int deleteCustomer(int id) throws DAOException {
 		String sql1 = "DELETE FROM reservations WHERE customer_id = ?";
 		String sql2 = "DELETE FROM customers WHERE id = ?";

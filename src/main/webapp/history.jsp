@@ -39,7 +39,7 @@
 			<th>宿名</th>
 			<th>価格</th>
 			<th>人数</th>
-			<th>日時</th>
+			<th>チェックイン日</th>
 		</tr>
 		<c:forEach items="${reservation}" var="reserve">
 			<tr>

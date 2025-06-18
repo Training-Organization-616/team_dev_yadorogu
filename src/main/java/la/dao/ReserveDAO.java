@@ -109,6 +109,39 @@ public class ReserveDAO {
 			throw new DAOException("レコードの取得に失敗しました。");
 		}
 	}
+	
+	//　会員の予約履歴を検索
+		public boolean findByCustomer_idAndDate(int customer_id, String date) throws DAOException {
+			// SQL文の作成
+			String sql = "SELECT * FROM reservations WHERE customer_id=? AND date=?::DATE";
+
+			try (// データベースへの接続
+					Connection con = DriverManager.getConnection(url, user, pass);
+					// PreparedStatementオブジェクトの取得
+					PreparedStatement st = con.prepareStatement(sql);) {
+
+				st.setInt(1, customer_id);
+				st.setString(2, date);
+
+				try (
+						// SQLの実行
+						ResultSet rs = st.executeQuery();) {
+					// 結果の取得
+					boolean isExist = false;
+					if (rs.next()) {
+						isExist = true;
+					}
+					// カテゴリ一覧をListとして返す
+					return isExist;
+				} catch (SQLException e) {
+					e.printStackTrace();
+					throw new DAOException("レコードの取得に失敗しました。");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new DAOException("レコードの取得に失敗しました。");
+			}
+		}
 
 	// 予約情報を追加
 	public void addReserve(int hotel_id, int customer_id, int persons, String date) throws DAOException {
@@ -132,4 +165,6 @@ public class ReserveDAO {
 			throw new DAOException("レコードの取得に失敗しました。");
 		}
 	}
+	
+	
 }
