@@ -39,7 +39,7 @@ public class CustomerServlet extends HttpServlet {
 				gotoPage(request, response, "addCustomer.jsp");
 
 			} else if (action.equals("add")) {
-				// 
+				// 会員を新規登録
 				String customerName = request.getParameter("customerName");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
@@ -47,6 +47,7 @@ public class CustomerServlet extends HttpServlet {
 				String birthday = request.getParameter("birthday");
 				String password = request.getParameter("password");
 				String passwordCheck = request.getParameter("passwordCheck");
+				// 入力されているかチェック
 				if (customerName == null || customerName.length() == 0 || address == null || address.length() == 0 ||
 						tel == null || tel.length() == 0 || email == null || email.length() == 0 ||
 						birthday == null || birthday.length() == 0 || password == null || password.length() == 0 ||
@@ -58,6 +59,7 @@ public class CustomerServlet extends HttpServlet {
 					return;
 				}
 				CustomerDAO dao = new CustomerDAO();
+				// メールアドレスがすでに使われていないかチェック
 				if (dao.findByEmail(email)) {
 					request.setAttribute("message", "このメールアドレスはすでに使用されています");
 					// 今日の日付を送る
@@ -65,6 +67,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
+				// パスワードに空白が含まれていないかチェック
 				if(password.contains("\s")) {
 					request.setAttribute("message", "パスワードに空白が含まれています");
 					// 今日の日付を送る
@@ -72,6 +75,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
+				// パスワードと確認用パスワードが一致しているかチェック
 				if (!password.equals(passwordCheck)) {
 					request.setAttribute("message", "パスワードが一致しません");
 					// 今日の日付を送る
@@ -79,18 +83,20 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "addCustomer.jsp");
 					return;
 				}
+				// 新規登録を実行
 				dao.addCustomer(customerName, address, tel, email, birthday, password);
 				request.setAttribute("message", "新規登録が完了しました。ログインしてください。");
 				gotoPage(request, response, "/login.jsp");
 
 			} else if (action.equals("update")) {
-				// 
+				// 情報変更画面を表示
 				// 今日の日付を送る
 				request.setAttribute("today", today);
 				gotoPage(request, response, "updateCustomer.jsp");
 
 			} else if (action.equals("updateCustomer")) {
-				// 
+				// 会員情報の変更
+				// セッションが切れていないかチェック
 				HttpSession session = request.getSession(false);
 				if (session == null) {
 					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
@@ -104,6 +110,7 @@ public class CustomerServlet extends HttpServlet {
 				String birthday = request.getParameter("birthday").strip();
 				String password = request.getParameter("password");
 				String passwordCheck = request.getParameter("passwordCheck");
+				// 入力されているかチェック
 				if (customerName == null || customerName.length() == 0 || address == null || address.length() == 0 ||
 						tel == null || tel.length() == 0 || email == null || email.length() == 0 ||
 						birthday == null || birthday.length() == 0 || password == null || password.length() == 0 ||
@@ -116,6 +123,7 @@ public class CustomerServlet extends HttpServlet {
 				}
 				CustomersBean customer = (CustomersBean) session.getAttribute("user");
 				CustomerDAO dao = new CustomerDAO();
+				// メールアドレスがすでに使われていないかチェック
 				if (!email.equals(customer.getEmail()) && dao.findByEmail(email)) {
 					request.setAttribute("message", "このメールアドレスはすでに使用されています");
 					// 今日の日付を送る
@@ -123,6 +131,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
+				// パスワードに空白が含まれていないかチェック
 				if(password.contains("\s")) {
 					request.setAttribute("message", "パスワードに空白が含まれています");
 					// 今日の日付を送る
@@ -130,6 +139,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
+				// パスワードと確認用パスワードが一致しているかチェック
 				if (!password.equals(passwordCheck)) {
 					request.setAttribute("message", "パスワードが一致しません");
 					// 今日の日付を送る
@@ -137,11 +147,12 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}	
-				
+				// 会員情報を更新
 				CustomersBean bean = new CustomersBean(customer.getId(), customerName, address, tel, email, birthday,
 						customer.getMembershipdate(), password, customer.isAdmin());
 				dao.updateCustomer(bean);
 				session.setAttribute("user", bean);
+				// 権限ごとに遷移先を変更
 				if (customer.isAdmin()) {
 					response.sendRedirect("HotelServlet");
 				} else {
@@ -149,13 +160,15 @@ public class CustomerServlet extends HttpServlet {
 				}
 
 			} else if (action.equals("delete")) {
-				// 
+				// 会員の退会
+				// セッションが切れていないかチェック
 				HttpSession session = request.getSession(false);
 				if (session == null) {
 					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
+				// 会員情報を削除する
 				CustomersBean customer = (CustomersBean) session.getAttribute("user");
 				CustomerDAO dao = new CustomerDAO();
 				dao.deleteCustomer(customer.getId());

@@ -44,7 +44,7 @@ public class CustomerDAO {
 				if (rs.next()) {
 					isExist = true;
 				}
-				// カテゴリ一覧をListとして返す
+				// 結果を返す
 				return isExist;
 			} catch (SQLException e) {
 				e.printStackTrace();

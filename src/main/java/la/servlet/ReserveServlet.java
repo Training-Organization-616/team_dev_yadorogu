@@ -35,18 +35,21 @@ public class ReserveServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			if (action == null || action.length() == 0) {
 				// パラメータなしの場合は予約確認画面を表示
+				// セッションが切れていないかチェック
 				HttpSession session = request.getSession(false);
 				if(session == null) {
 					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
+				// ログインしているかチェック
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
 				if(customer == null) {
 					request.setAttribute("message", "ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
+				// 宿情報の取得
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				ReserveDAO dao = new ReserveDAO();
 				HotelsBean bean = dao.findByHotel_id(hotel_id);
@@ -57,11 +60,12 @@ public class ReserveServlet extends HttpServlet {
 				gotoPage(request, response, "reserve.jsp");
 
 			} else if (action.equals("add")) {
-				// 
+				// 予約情報を追加
 				int persons = Integer.parseInt(request.getParameter("persons"));
 				String date = request.getParameter("date");
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				ReserveDAO dao = new ReserveDAO();
+				// 入力されているかチェック
 				if(date == null || date.length() == 0) {
 					HotelsBean bean = dao.findByHotel_id(hotel_id);
 					request.setAttribute("hotel", bean);
@@ -71,6 +75,7 @@ public class ReserveServlet extends HttpServlet {
 				}
 				HttpSession session = request.getSession();
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
+				// 同じ日に予約していないかチェック
 				if (dao.findByCustomer_idAndDate(customer.getId(), date)) {
 					HotelsBean bean = dao.findByHotel_id(hotel_id);
 					request.setAttribute("hotel", bean);
@@ -78,11 +83,13 @@ public class ReserveServlet extends HttpServlet {
 					gotoPage(request, response, "reserve.jsp");
 					return;
 				}
-				
+				// 予約情報を追加
 				dao.addReserve(hotel_id, customer.getId(), persons, date);
 				gotoPage(request, response, "reserveCommit.jsp");
 
 			} else if (action.equals("history")) {
+				// 予約一覧画面を表示
+				// セッションが切れていないかチェック
 				HttpSession session = request.getSession(false);
 				if(session == null) {
 					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
@@ -90,11 +97,13 @@ public class ReserveServlet extends HttpServlet {
 					return;
 				}
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
+				// ログインしているかチェック
 				if(customer == null) {
 					request.setAttribute("message", "ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
+				// 予約一覧を取得
 				ReserveDAO dao = new ReserveDAO();
 				List<ReservationsBean> list = dao.findByCustomer_id(customer.getId());
 				request.setAttribute("reservation", list);

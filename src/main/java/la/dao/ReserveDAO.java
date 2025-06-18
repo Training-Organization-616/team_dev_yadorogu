@@ -60,7 +60,7 @@ public class ReserveDAO {
 					int maxperson = rs.getInt("maxperson");
 					bean = new HotelsBean(hotel_id, name, category_id, checkin, checkout, price, maxperson);
 				}
-				// カテゴリ一覧をListとして返す
+				// ホテル情報を返す
 				return bean;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -110,7 +110,7 @@ public class ReserveDAO {
 		}
 	}
 	
-	//　会員の予約履歴を検索
+	// 同じ日に予約しているか検索
 		public boolean findByCustomer_idAndDate(int customer_id, String date) throws DAOException {
 			// SQL文の作成
 			String sql = "SELECT * FROM reservations WHERE customer_id=? AND date=?::DATE";
@@ -131,7 +131,7 @@ public class ReserveDAO {
 					if (rs.next()) {
 						isExist = true;
 					}
-					// カテゴリ一覧をListとして返す
+					// 結果を返す
 					return isExist;
 				} catch (SQLException e) {
 					e.printStackTrace();
