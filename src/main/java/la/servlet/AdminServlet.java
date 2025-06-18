@@ -45,6 +45,7 @@ public class AdminServlet extends HttpServlet {
 				List<CustomersBean> list = dao.findAll();
 				//リクエストスコープとセッションスコープに保存
 				request.setAttribute("customers", list);
+				request.setAttribute("mess", "会員一覧");
 				session.setAttribute("user", bean);
 				gotoPage(request, response, "/admintop.jsp");
 
@@ -60,6 +61,7 @@ public class AdminServlet extends HttpServlet {
 				dao.deleteCustomer(id);
 
 				List<CustomersBean> list = dao.findAll();
+				request.setAttribute("mess", "会員一覧");
 				request.setAttribute("customers", list);
 				gotoPage(request, response, "/admintop.jsp");
 
@@ -76,6 +78,7 @@ public class AdminServlet extends HttpServlet {
 
 				List<CustomersBean> list = dao.findAll();
 				request.setAttribute("customers", list);
+				request.setAttribute("mess", "会員一覧");
 				gotoPage(request, response, "/admintop.jsp");
 
 				/*
@@ -86,10 +89,12 @@ public class AdminServlet extends HttpServlet {
 				String searchAdmin = request.getParameter("searchAdmin").strip();
 				AdminDAO dao = new AdminDAO();
 				List<CustomersBean> list;
+				int searchIndex = 0;
 				//検索欄が空欄の場合、会員一覧のまま
 				if (searchAdmin == null || searchAdmin.length() == 0) {
 					list = dao.findAll();
 					//エラーメッセージとともに会員一覧画面のまま
+					request.setAttribute("mess", "検索結果");
 					request.setAttribute("message", "会員IDを入力してください");
 					request.setAttribute("customers", list);
 					gotoPage(request, response, "/admintop.jsp");
@@ -97,15 +102,23 @@ public class AdminServlet extends HttpServlet {
 					try {
 						//IDが入力された場合、IDのよって検索
 						// 数字として解釈し検索
-						int searchIndex = Integer.parseInt(searchAdmin);
+						searchIndex = Integer.parseInt(searchAdmin);
 						list = dao.searchCustomer(searchIndex);
+						//検索結果に誰も表示されなかったら、メッセージ表示
+						if (list == null || list.size() == 0) {
+							request.setAttribute("mess", "検索結果");
+							request.setAttribute("message", "会員ID" + searchIndex + "は見つかりませんでした。");
+							gotoPage(request, response, "/admintop.jsp");
+						}
 					} catch (NumberFormatException e) {
 						// 数字に変換できなかった場合のエラー処理
 						list = dao.findAll(); // 会員一覧を表示したまま
+						request.setAttribute("mess", "検索結果");
 						request.setAttribute("message", "IDは半角数字で入力してください");
 					}
 				}
 				request.setAttribute("customers", list);
+				request.setAttribute("mess", "検索結果");
 				gotoPage(request, response, "/admintop.jsp");
 			}
 		} catch (DAOException e) {

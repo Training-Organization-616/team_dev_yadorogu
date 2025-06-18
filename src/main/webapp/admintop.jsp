@@ -61,7 +61,7 @@
 <br>
 <br>
 <div class="center">
-<label>会員一覧</label>
+<label>${mess}</label>
 </div>
 	<div class="search">
 	<form action="/team_dev_yadorogu/AdminServlet?action=search" method="post">
