@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>宿一覧</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
