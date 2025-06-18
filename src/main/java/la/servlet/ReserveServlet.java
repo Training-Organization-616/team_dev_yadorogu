@@ -1,6 +1,7 @@
 package la.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -50,6 +51,8 @@ public class ReserveServlet extends HttpServlet {
 				ReserveDAO dao = new ReserveDAO();
 				HotelsBean bean = dao.findByHotel_id(hotel_id);
 				request.setAttribute("hotel", bean);
+				LocalDate today = LocalDate.now();
+				request.setAttribute("today", today);
 				gotoPage(request, response, "reserve.jsp");
 
 			} else if (action.equals("add")) {

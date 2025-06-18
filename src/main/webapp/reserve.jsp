@@ -64,7 +64,7 @@
 				</td>
 			</tr>
 			<tr><th>チェックイン日時</th>
-				<td><input type="date" name="date"></td>
+				<td><input type="date" min="${today}" name="date"></td>
 			</tr>
 		</table>
 		<br>
