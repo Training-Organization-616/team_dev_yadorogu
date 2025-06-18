@@ -54,6 +54,7 @@ public class HotelServlet extends HttpServlet {
 				String checkin = request.getParameter("checkin").strip();
 				String checkout = request.getParameter("checkout").strip();
 				String maxpersons = request.getParameter("maxpersons").strip();
+
 				//入力項目に空欄がないとき
 				if (hotelName != null && hotelName.length() != 0
 						&& categoryId != null && categoryId.length() != 0
@@ -61,6 +62,7 @@ public class HotelServlet extends HttpServlet {
 						&& checkin != null && checkin.length() != 0
 						&& checkout != null && checkout.length() != 0
 						&& maxpersons != null && maxpersons.length() != 0) {
+
 					//  宿名重複チェック追加
 					boolean duplicate = dao.checkHotel(hotelName);
 					if (duplicate) {
@@ -69,18 +71,21 @@ public class HotelServlet extends HttpServlet {
 						gotoPage(request, response, "/addHotel.jsp");
 						return; // 処理をここで止める
 					}
+
 					//カテゴリーIDを整数化
 					int cid = Integer.parseInt(categoryId);
 					//料金、最大宿泊人数に半角数字が入力されているかのチェック
 					try {
 						int pri = Integer.parseInt(price);
 						int max = Integer.parseInt(maxpersons);
+
 						//０以下だったときは登録させない
 						if (pri <= 0 || max <= 0) {
 							request.setAttribute("mess", "料金、最大宿泊人数は0以上で入力してください");
 							gotoPage(request, response, "/addHotel.jsp");
 							return; // 処理をここで止める
 						}
+
 						//"addHotel"で宿の新規登録
 						dao.addHotel(hotelName, cid, pri, checkin, checkout, max);
 					} catch (NumberFormatException e) {
