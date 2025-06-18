@@ -114,8 +114,9 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}
+				CustomersBean customer = (CustomersBean) session.getAttribute("user");
 				CustomerDAO dao = new CustomerDAO();
-				if (dao.findByEmail(email)) {
+				if (!email.equals(customer.getEmail()) && dao.findByEmail(email)) {
 					request.setAttribute("message", "このメールアドレスはすでに使用されています");
 					// 今日の日付を送る
 					request.setAttribute("today", today);
@@ -136,7 +137,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "updateCustomer.jsp");
 					return;
 				}	
-				CustomersBean customer = (CustomersBean) session.getAttribute("user");
+				
 				CustomersBean bean = new CustomersBean(customer.getId(), customerName, address, tel, email, birthday,
 						customer.getMembershipdate(), password, customer.isAdmin());
 				dao.updateCustomer(bean);
