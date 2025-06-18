@@ -29,6 +29,11 @@
       </form>
     </section>
   </div>
+  <br>
+  <br>
+  <div class="center">
+  <a href="/team_dev_yadorogu/HotelServlet?action=">topページに戻る</a>
+  </div>
 </body>
 
 </html>
