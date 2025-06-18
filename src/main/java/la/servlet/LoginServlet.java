@@ -41,9 +41,12 @@ public class LoginServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			HttpSession session = request.getSession();
 
+			//アクションがNULLならログインページを表示
 			if (action.equals(null) || action.length() == 0) {
 				gotoPage(request, response, "/login.jsp");
-			} else if (action.equals("login")) {
+			}
+			//アクションがloginならログイン処理を実行
+			else if (action.equals("login")) {
 				String email = request.getParameter("email").strip();
 				String password = request.getParameter("password").strip();
 				if (email.equals(null) || email.length() == 0 || password.equals(null) || password.length() == 0) {
@@ -64,7 +67,9 @@ public class LoginServlet extends HttpServlet {
 				} else {
 					response.sendRedirect("AdminServlet");
 				}
-			} else if (action.equals("logout")) {
+			}
+			//アクションがlogoutならログアウト処理を実行
+			else if (action.equals("logout")) {
 				session.invalidate();
 				response.sendRedirect("HotelServlet");
 			}
