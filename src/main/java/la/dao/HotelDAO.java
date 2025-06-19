@@ -170,16 +170,23 @@ public class HotelDAO {
 	 * 宿情報削除
 	 */
 	public int deleteHotel(int id) throws DAOException {
-		String sql = "DELETE FROM hotels WHERE id = ?";
+		//宿情報（子）のデータ削除
+		String sql1 = "DELETE FROM reservations WHERE customer_id = ?";
+		//宿情報（親）のデータ削除	
+		String sql2 = "DELETE FROM hotels WHERE id = ?";
 		try (
 				// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
-				PreparedStatement st = con.prepareStatement(sql);) {
-			st.setInt(1, id);
+				PreparedStatement st1 = con.prepareStatement(sql1);
+				PreparedStatement st2 = con.prepareStatement(sql2);) {
+			//「?」に代入
+			st1.setInt(1, id);
+			st2.setInt(1, id);
 			// SQLの実行
-			int rows = st.executeUpdate();
-			return rows;
+			st1.executeUpdate();
+			int rows2 = st2.executeUpdate();
+			return rows2;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
