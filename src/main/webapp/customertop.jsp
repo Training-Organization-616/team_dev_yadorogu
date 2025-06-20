@@ -36,7 +36,19 @@
 </div>
 
 
+<form action="/team_dev_yadorogu/HotelServlet?action=sort" method="get">
 
+	<select name="sortHotels">
+		<option value="evaluationDesc">評価高い順</option>
+		<option value="evaluationAsc">評価低い順</option>
+		<option value="feeDesc">料金高い順</option>
+		<option value="feeAsc">料金低い順</option>
+		<option value="checkinDesc">チェックイン遅い順</option>
+		<option value="checkinAsc">チェックイン早い順</option>
+	</select>
+	
+	<button>並び替える</button>
+</form>
 
 
 <div class="card-container">
@@ -58,7 +70,16 @@
     <p><strong>チェックアウト：</strong>${hotel.checkout}</p>
 
     <button type="submit">予約</button>
-  </form>
+    
+    </form>
+    
+    <form action="/team_dev_yadorogu/ReviewServlet" method="get">
+      <input type="hidden" name="hotel_id" value="${hotel.id}">
+      <button type="submit">詳細</button>
+    </form>
+    
+    
+  
 </c:forEach>
 </div>
 
