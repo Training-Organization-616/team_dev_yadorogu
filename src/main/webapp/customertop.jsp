@@ -36,7 +36,7 @@
 </div>
 
 
-<form action="/team_dev_yadorogu/HotelServlet?action=sort" method="get">
+<form action="/team_dev_yadorogu/HotelServlet" method="get">
 
 	<select name="sortHotels">
 		<option value="evaluationDesc">評価高い順</option>
@@ -48,6 +48,7 @@
 	</select>
 	
 	<button>並び替える</button>
+	<input type="hidden" name="action" value="sort">
 </form>
 
 
@@ -68,20 +69,51 @@
 
     <p><strong>チェックイン：</strong>${hotel.checkin}</p>
     <p><strong>チェックアウト：</strong>${hotel.checkout}</p>
+    
+
+    <!-- ★評価部分 -->
+    <c:choose>
+      <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
+        <p class="review-text">未評価</p>
+      </c:when>
+      <c:otherwise>
+      
+<p>
+    <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
+</p>
+      </c:otherwise>
+    </c:choose>
+
+
+<br>
 
     <button type="submit">予約</button>
     
-    </form>
     
+     </form>
     <form action="/team_dev_yadorogu/ReviewServlet" method="get">
       <input type="hidden" name="hotel_id" value="${hotel.id}">
       <button type="submit">詳細</button>
     </form>
-    
+   
     
   
 </c:forEach>
 </div>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", () => {
+	  const stars = document.querySelectorAll('.star-rating');
+	  stars.forEach(el => {
+	    const rate = parseFloat(el.dataset.rate);
+	    if (!isNaN(rate)) {
+	      const percentage = Math.min(Math.max(rate, 0), 5) / 5 * 100;
+	      el.style.setProperty('--starWidth', `${percentage}%`);
+	    }
+	  });
+	});
+
+
+</script>
 
 </body>
 </html>
