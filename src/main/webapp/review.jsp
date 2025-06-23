@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,10 +86,11 @@
 	</table>
 	<br>
 	<div class="reviewcenter">
-		<div class="reviewform">
-			<form action="/team_dev_yadorogu/ReviewServlet?action=addReview"
-				method="post">
+		<form action="/team_dev_yadorogu/ReviewServlet?action=addReview"
+			method="post">
+			<div class="reviewform">
 				<input type="hidden" name="hotel_id" value="${hotel.id}">
+				
 				<div class="stars">
 					<input id="star5" type="radio" name="evaluation" value="5">
 					<label for="star5">★</label> <input id="star4" type="radio"
@@ -98,12 +100,14 @@
 						name="evaluation" value="2"> <label for="star2">★</label>
 					<input id="star1" type="radio" name="evaluation" value="1" checked>
 					<label for="star1">★</label>
+					<span class="startext">評価：</span>
 				</div>
-				<textarea name="comment"></textarea>
-				<br>
-				<button>投稿</button>
-			</form>
-		</div>
+				<textarea class="commentarea" name="comment" placeholder="感想を入力してください"></textarea>
+			</div>
+			<div class="reviewbutton">
+				<button class="icon-button"> <i class="fas fa-pen"></i>投稿</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
