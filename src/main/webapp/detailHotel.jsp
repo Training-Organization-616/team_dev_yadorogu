@@ -10,8 +10,9 @@
 <title>宿詳細情報</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
-</head>
+
 <body>
 
 <div class="header-glass">
@@ -39,7 +40,7 @@
 <label>宿詳細情報</label>
 <form action="/team_dev_yadorogu/ReviewServlet?action=add" method="post">
 	<input type="hidden" name="hotel_id" value="${hotel.id}">
-	<div class="button-wrapper">
+	<div class="button-wrap">
 	<button class="icon-button"> <i class="fas fa-pen"></i>口コミを投稿</button>
 	</div>
 </form>
@@ -79,6 +80,15 @@
     </div>
   </c:forEach>
 </div>
+
+<div class="bottomFooter__topBtn" onclick="scrollToTop()">TOP</div>
+
+
+<script>
+  function scrollToTop() { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
