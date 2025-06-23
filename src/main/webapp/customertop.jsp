@@ -35,7 +35,7 @@
   </div>
 </div>
 
-
+<div class="search-outside">
 <form action="/team_dev_yadorogu/HotelServlet" method="get">
 
 	<select name="sortHotels">
@@ -50,12 +50,15 @@
 	<button>並び替える</button>
 	<input type="hidden" name="action" value="sort">
 </form>
+</div>
 
 
 <div class="card-container">
 <c:forEach items="${hotels}" var="hotel">
-  <form action="/team_dev_yadorogu/ReserveServlet" method="post" class="hotel-card">
-    <input type="hidden" name="hotel_id" value="${hotel.id}">
+<div class="hotel-card">
+
+<!-- もともとformの改支店あった場所。 -->
+  
     <h3 class="hotel-name">${hotel.name}</h3>
 
 
@@ -74,30 +77,30 @@
     <!-- ★評価部分 -->
     <c:choose>
       <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
-        <p class="review-text">未評価</p>
+        <p class="stersize">未評価</p>
       </c:when>
       <c:otherwise>
-      
-<p>
+<p class="stersize">
     <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
+    <strong>星${hotel.avgevaluation}</strong>
 </p>
       </c:otherwise>
     </c:choose>
-
-
-<br>
-
-    <button type="submit">予約</button>
     
-    
+    <div class="button-wrapper">
+	<form action="/team_dev_yadorogu/ReserveServlet" method="post" >
+    	<input type="hidden" name="hotel_id" value="${hotel.id}">
+    	<button type="submit">予約</button>
      </form>
+     
     <form action="/team_dev_yadorogu/ReviewServlet" method="get">
       <input type="hidden" name="hotel_id" value="${hotel.id}">
       <button type="submit">詳細</button>
     </form>
-   
     
-  
+   </div>
+    </div>
+    
 </c:forEach>
 </div>
 <script type="text/javascript">

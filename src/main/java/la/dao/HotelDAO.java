@@ -35,8 +35,21 @@ public class HotelDAO {
 	public List<HotelsBean> findAll() throws DAOException {
 
 		// SQL文の作成
-		String sql = "select h.id,h.name,h.price,c.name as category_name,h.checkin,h.checkout from hotels h "
-				+ "join categories c on h.category_id = c.id;";
+		String sql = "SELECT \n"
+				+ "  h.id,\n"
+				+ "  h.name,\n"
+				+ "  c.name AS category_name,\n"
+				+ "  h.checkin,\n"
+				+ "  h.checkout,\n"
+				+ "  h.price,\n"
+				+ "  r.avg\n"
+				+ "FROM hotels h\n"
+				+ "LEFT JOIN (\n"
+				+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
+				+ "  FROM reviews \n"
+				+ "  GROUP BY hotel_id\n"
+				+ ") r ON h.id = r.hotel_id\n"
+				+ "JOIN categories c ON h.category_id = c.id";
 
 		try (
 				// データベースへの接続
@@ -55,9 +68,7 @@ public class HotelDAO {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String hotel_name = rs.getString("name");
-				int price = rs.getInt("price");
 				String name = rs.getString("category_name");
-
 				/*
 				 * Time型
 				 */
@@ -68,7 +79,9 @@ public class HotelDAO {
 				String in = checkinTime.format(formatter);
 				String out = checkoutTime.format(formatter);
 
-				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out);
+				int price = rs.getInt("price");
+				double ave = rs.getDouble("avg");
+				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out, ave);
 				list.add(bean);
 			}
 			// カテゴリ一覧をListとして返す
@@ -212,7 +225,7 @@ public class HotelDAO {
 					+ "  r.avg\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, AVG(evaluation) AS avg \n"
+					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
 					+ "  FROM reviews \n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
@@ -230,7 +243,7 @@ public class HotelDAO {
 					+ "  r.avg\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, AVG(evaluation) AS avg \n"
+					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
 					+ "  FROM reviews \n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
@@ -248,7 +261,7 @@ public class HotelDAO {
 					+ "  r.avg\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, AVG(evaluation) AS avg \n"
+					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
 					+ "  FROM reviews \n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
@@ -266,7 +279,7 @@ public class HotelDAO {
 					+ "  r.avg\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, AVG(evaluation) AS avg \n"
+					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
 					+ "  FROM reviews \n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
@@ -284,7 +297,7 @@ public class HotelDAO {
 					+ "  r.avg\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, AVG(evaluation) AS avg \n"
+					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
 					+ "  FROM reviews \n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
@@ -302,7 +315,7 @@ public class HotelDAO {
 					+ "  r.avg\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, AVG(evaluation) AS avg \n"
+					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
 					+ "  FROM reviews \n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
