@@ -10,6 +10,7 @@ public class HotelsBean {
 	private int maxperson;
 	private String category_name;
 	private double avgevaluation;
+	private int commentCount;
 
 	public HotelsBean(int id, String name) {
 		this.id = id;
@@ -26,7 +27,7 @@ public class HotelsBean {
 	}
 
 	public HotelsBean(int id, String name, int price, String category_name, String checkin, String checkout,
-			double avgevaluation) {
+			double avgevaluation, int commentCount) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -34,6 +35,7 @@ public class HotelsBean {
 		this.checkin = checkin;
 		this.checkout = checkout;
 		this.avgevaluation = avgevaluation;
+		this.commentCount = commentCount;
 	}
 
 	public HotelsBean() {
@@ -139,6 +141,14 @@ public class HotelsBean {
 
 	public void setAvgevaluation(double avgevaluation) {
 		this.avgevaluation = avgevaluation;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int count) {
+		this.commentCount = count;
 	}
 
 }

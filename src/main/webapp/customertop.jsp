@@ -70,9 +70,12 @@
 <p class="stersize">
     <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
     <strong>星${hotel.avgevaluation}</strong>
+    <span class="kutikomi">口コミ${hotel.commentCount}件</span>
 </p>
       </c:otherwise>
     </c:choose>
+    
+    
 
 <p><strong>1泊：</strong>
   <span class="price"><fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円</span>

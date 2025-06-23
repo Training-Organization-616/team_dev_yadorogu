@@ -35,21 +35,26 @@ public class HotelDAO {
 	public List<HotelsBean> findAll() throws DAOException {
 
 		// SQL文の作成
-		String sql = "SELECT \n"
+		String sql = "SELECT\n"
 				+ "  h.id,\n"
 				+ "  h.name,\n"
 				+ "  c.name AS category_name,\n"
 				+ "  h.checkin,\n"
 				+ "  h.checkout,\n"
 				+ "  h.price,\n"
-				+ "  r.avg\n"
+				+ "  COALESCE(r.avg, 0) AS avg,\n"
+				+ "  COALESCE(r.count, 0) AS comment_count\n"
 				+ "FROM hotels h\n"
 				+ "LEFT JOIN (\n"
-				+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-				+ "  FROM reviews \n"
+				+ "  SELECT\n"
+				+ "    hotel_id,\n"
+				+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+				+ "    COUNT(*) AS count\n"
+				+ "  FROM reviews\n"
 				+ "  GROUP BY hotel_id\n"
 				+ ") r ON h.id = r.hotel_id\n"
-				+ "JOIN categories c ON h.category_id = c.id";
+				+ "JOIN categories c ON h.category_id = c.id;\n"
+				+ "";
 
 		try (
 				// データベースへの接続
@@ -81,7 +86,8 @@ public class HotelDAO {
 
 				int price = rs.getInt("price");
 				double ave = rs.getDouble("avg");
-				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out, ave);
+				int commentCount = rs.getInt("comment_count");
+				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out, ave, commentCount);
 				list.add(bean);
 			}
 			// カテゴリ一覧をListとして返す
@@ -215,108 +221,133 @@ public class HotelDAO {
 		String sql = null;
 		//評価高い順
 		if (sortHotels.equals("evaluationDesc")) {
-			sql = "SELECT \n"
+			sql = "SELECT\n"
 					+ "  h.id,\n"
 					+ "  h.name,\n"
 					+ "  c.name AS category_name,\n"
 					+ "  h.checkin,\n"
 					+ "  h.checkout,\n"
 					+ "  h.price,\n"
-					+ "  r.avg\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-					+ "  FROM reviews \n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
-					+ "ORDER BY r.avg DESC NULLS LAST";
+					+ "ORDER BY r.avg DESC NULLS LAST;\n"
+					+ "";
 			//評価低い順
 		} else if (sortHotels.equals("evaluationAsc")) {
-			sql = "SELECT \n"
+			sql = "SELECT\n"
 					+ "  h.id,\n"
 					+ "  h.name,\n"
 					+ "  c.name AS category_name,\n"
 					+ "  h.checkin,\n"
 					+ "  h.checkout,\n"
 					+ "  h.price,\n"
-					+ "  r.avg\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-					+ "  FROM reviews \n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
-					+ "ORDER BY r.avg asc NULLS LAST";
+					+ "ORDER BY r.avg ASC NULLS LAST\n";
 			//料金高い順
 		} else if (sortHotels.equals("feeDesc")) {
-			sql = "SELECT \n"
+			sql = "SELECT\n"
 					+ "  h.id,\n"
 					+ "  h.name,\n"
 					+ "  c.name AS category_name,\n"
 					+ "  h.checkin,\n"
 					+ "  h.checkout,\n"
 					+ "  h.price,\n"
-					+ "  r.avg\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-					+ "  FROM reviews \n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
 					+ "ORDER BY price desc";
 			//料金低い順
 		} else if (sortHotels.equals("feeAsc")) {
-			sql = "SELECT \n"
+			sql = "SELECT\n"
 					+ "  h.id,\n"
 					+ "  h.name,\n"
 					+ "  c.name AS category_name,\n"
 					+ "  h.checkin,\n"
 					+ "  h.checkout,\n"
 					+ "  h.price,\n"
-					+ "  r.avg\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-					+ "  FROM reviews \n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
 					+ "ORDER BY price asc";
 			//チェックイン時間遅い順
 		} else if (sortHotels.equals("checkinDesc")) {
-			sql = "SELECT \n"
+			sql = "SELECT\n"
 					+ "  h.id,\n"
 					+ "  h.name,\n"
 					+ "  c.name AS category_name,\n"
 					+ "  h.checkin,\n"
 					+ "  h.checkout,\n"
 					+ "  h.price,\n"
-					+ "  r.avg\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-					+ "  FROM reviews \n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
 					+ "ORDER BY checkin desc";
 			//チェックイン時間早い順
 		} else if (sortHotels.equals("checkinAsc")) {
-			sql = "SELECT \n"
+			sql = "SELECT\n"
 					+ "  h.id,\n"
 					+ "  h.name,\n"
 					+ "  c.name AS category_name,\n"
 					+ "  h.checkin,\n"
 					+ "  h.checkout,\n"
 					+ "  h.price,\n"
-					+ "  r.avg\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
 					+ "FROM hotels h\n"
 					+ "LEFT JOIN (\n"
-					+ "  SELECT hotel_id, round(AVG(evaluation),1) AS avg \n"
-					+ "  FROM reviews \n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
 					+ "  GROUP BY hotel_id\n"
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
@@ -352,7 +383,8 @@ public class HotelDAO {
 
 				int price = rs.getInt("price");
 				double ave = rs.getDouble("avg");
-				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out, ave);
+				int commentCount = rs.getInt("comment_count");
+				HotelsBean bean = new HotelsBean(id, hotel_name, price, name, in, out, ave, commentCount);
 				list.add(bean);
 			}
 			// カテゴリ一覧をListとして返す
