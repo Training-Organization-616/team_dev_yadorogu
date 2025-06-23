@@ -2,6 +2,7 @@ package la.bean;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class ReservationsBean {
 	//プロパティ
@@ -96,6 +97,26 @@ public class ReservationsBean {
 		LocalDate twoday = day.plusDays(1);
 		LocalDate test = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		return test.isAfter(twoday);
+	}
+
+	public int getCheck() {
+		int cs = 100;
+		//現在の日付の取得
+		LocalDate day = LocalDate.now();
+		//予約日をdate型に直す
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate resdate = LocalDate.parse(date, formatter);
+		long daysBetween = ChronoUnit.DAYS.between(day, resdate);
+
+		if (daysBetween <= 3) {
+			cs = 50;
+		} else if (daysBetween <= 7) {
+			cs = 20;
+		} else {
+			cs = 0;
+		}
+
+		return cs;
 	}
 
 }

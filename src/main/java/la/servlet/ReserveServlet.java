@@ -131,6 +131,18 @@ public class ReserveServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("ReserveServlet?action=history");
 				dispatcher.forward(request, response);
 
+			} //予約変更ページへ遷移
+
+			else if (action.equals("deletescreen")) {
+				int res_id = Integer.parseInt(request.getParameter("res_id"));
+				ReserveDAO dao = new ReserveDAO();
+
+				ReservationsBean rbean = dao.findByres_id(res_id);
+				HotelsBean hbean = dao.findByHotel_id(rbean.getHotel_id());
+
+				request.setAttribute("rbean", rbean);
+				request.setAttribute("hbean", hbean);
+				gotoPage(request, response, "deleteRes.jsp");
 			}
 			//予約の削除
 			else if (action.equals("deleteRes")) {

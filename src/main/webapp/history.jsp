@@ -70,26 +70,15 @@
 				</td>
 				<td>
 				<c:if test="${reserve.checkday}">
-				<form action="/team_dev_yadorogu/ReserveServlet?action=deleteRes" method="post">
+				<form action="/team_dev_yadorogu/ReserveServlet?action=deletescreen" method="post">
 				<input type="hidden" name="res_id" value="${reserve.id}">
-				<button onclick="MoveCheck(event);">キャンセル</button>
+				<button>キャンセル</button>
 				</form></c:if></td>
 				
 			</tr>
 		</c:forEach>
 	</table>
 	
-	<script type="text/javascript">
-//ダイアログでの処理
-function MoveCheck(event) {
-    if( confirm("予約のキャンセルを行いますか?") ) {
-        // OKが押された場合は、何もせずにフォーム送信
-    } else {
-        // キャンセルが押された場合、フォーム送信を防ぐ
-        event.preventDefault();
-    }
-}
-
-</script>
+	
 </body>
 </html>
