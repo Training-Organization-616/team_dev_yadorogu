@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +35,13 @@
     </nav>
   </div>
 </div>
-
+<br>
 <label>宿詳細情報</label>
 <form action="/team_dev_yadorogu/ReviewServlet?action=add" method="post">
 	<input type="hidden" name="hotel_id" value="${hotel.id}">
-	<button>口コミを投稿</button>
+	<div class="button-wrapper">
+	<button class="icon-button"> <i class="fas fa-pen"></i>口コミを投稿</button>
+	</div>
 </form>
 <table>
 	<tr><th>ホテル名</th><td>${hotel.name}</td></tr>

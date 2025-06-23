@@ -681,3 +681,24 @@ label{
     display: flex;
   }
 }
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #6D5F4E;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.icon-button i {
+  font-size: 1rem;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end; /* 右寄せ */
+}
