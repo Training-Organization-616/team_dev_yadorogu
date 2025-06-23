@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
 <title>宿一覧</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
-
 	
 </head>
 <body>
@@ -105,5 +105,14 @@
     
 </c:forEach>
 </div>
+<div class="bottomFooter__topBtn" onclick="scrollToTop()">TOP</div>
+
+
+<script>
+  function scrollToTop() { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
 </body>
 </html>
