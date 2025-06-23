@@ -59,7 +59,7 @@
   
 		<a class="cardTitle" href="/team_dev_yadorogu/ReviewServlet?hotel_id=${hotel.id}">${hotel.name}</a>
 		
-		    <!-- ★評価部分 -->
+		   
     <c:choose>
       <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
         <p class="stersize">未評価</p>
@@ -82,19 +82,6 @@
     <p><strong>チェックイン：</strong>${hotel.checkin}</p>
     <p><strong>チェックアウト：</strong>${hotel.checkout}</p>
     
-
-     
-<!--    <c:choose>-->
-<!--      <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">-->
-<!--        <p class="stersize">未評価</p>-->
-<!--      </c:when>-->
-<!--      <c:otherwise>-->
-<!--<p class="stersize">-->
-<!--    <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>-->
-<!--    <strong>星${hotel.avgevaluation}</strong>-->
-<!--</p>-->
-<!--      </c:otherwise>-->
-<!--    </c:choose>-->
     
     <div class="button-wrapper">
 	<form action="/team_dev_yadorogu/ReserveServlet" method="get" >
