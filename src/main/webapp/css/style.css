@@ -313,6 +313,7 @@ body {
 .star5_rating[data-rate="0.8"]:after { width: 16%; }
 .star5_rating[data-rate="0.9"]:after { width: 18%; }
 .star5_rating[data-rate="1.0"]:after { width: 20%; }
+.star5_rating[data-rate="1"]:after { width: 20%; }
 .star5_rating[data-rate="1.1"]:after { width: 22%; }
 .star5_rating[data-rate="1.2"]:after { width: 24%; }
 .star5_rating[data-rate="1.3"]:after { width: 26%; }
@@ -323,6 +324,7 @@ body {
 .star5_rating[data-rate="1.8"]:after { width: 36%; }
 .star5_rating[data-rate="1.9"]:after { width: 38%; }
 .star5_rating[data-rate="2.0"]:after { width: 40%; }
+.star5_rating[data-rate="2"]:after { width: 40%; }
 .star5_rating[data-rate="2.1"]:after { width: 42%; }
 .star5_rating[data-rate="2.2"]:after { width: 44%; }
 .star5_rating[data-rate="2.3"]:after { width: 46%; }
@@ -333,6 +335,7 @@ body {
 .star5_rating[data-rate="2.8"]:after { width: 56%; }
 .star5_rating[data-rate="2.9"]:after { width: 58%; }
 .star5_rating[data-rate="3.0"]:after { width: 60%; }
+.star5_rating[data-rate="3"]:after { width: 60%; }
 .star5_rating[data-rate="3.1"]:after { width: 62%; }
 .star5_rating[data-rate="3.2"]:after { width: 64%; }
 .star5_rating[data-rate="3.3"]:after { width: 66%; }
@@ -343,6 +346,7 @@ body {
 .star5_rating[data-rate="3.8"]:after { width: 76%; }
 .star5_rating[data-rate="3.9"]:after { width: 78%; }
 .star5_rating[data-rate="4.0"]:after { width: 80%; }
+.star5_rating[data-rate="4"]:after { width: 80%; }
 .star5_rating[data-rate="4.1"]:after { width: 82%; }
 .star5_rating[data-rate="4.2"]:after { width: 84%; }
 .star5_rating[data-rate="4.3"]:after { width: 86%; }
@@ -353,6 +357,7 @@ body {
 .star5_rating[data-rate="4.8"]:after { width: 96%; }
 .star5_rating[data-rate="4.9"]:after { width: 98%; }
 .star5_rating[data-rate="5.0"]:after { width: 100%; }
+.star5_rating[data-rate="5"]:after { width: 100%; }
 
 .balloon5 {
   width: 100%;
