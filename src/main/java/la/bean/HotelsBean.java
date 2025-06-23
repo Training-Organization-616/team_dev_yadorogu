@@ -140,4 +140,5 @@ public class HotelsBean {
 	public void setAvgevaluation(double avgevaluation) {
 		this.avgevaluation = avgevaluation;
 	}
+
 }

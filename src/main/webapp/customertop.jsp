@@ -12,11 +12,10 @@
 </head>
 <body>
 
-
 <div class="header-glass">
   <div class="container">
     <a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
-
+    
     <nav class="nav-wrapper">
       <ul class="nav-links">
         <c:choose>
@@ -88,13 +87,14 @@
     </c:choose>
     
     <div class="button-wrapper">
-	<form action="/team_dev_yadorogu/ReserveServlet" method="post" >
+	<form action="/team_dev_yadorogu/ReserveServlet" method="get" >
     	<input type="hidden" name="hotel_id" value="${hotel.id}">
     	<button type="submit">予約</button>
      </form>
      
     <form action="/team_dev_yadorogu/ReviewServlet" method="get">
       <input type="hidden" name="hotel_id" value="${hotel.id}">
+
       <button type="submit">詳細</button>
     </form>
     
@@ -103,20 +103,5 @@
     
 </c:forEach>
 </div>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", () => {
-	  const stars = document.querySelectorAll('.star-rating');
-	  stars.forEach(el => {
-	    const rate = parseFloat(el.dataset.rate);
-	    if (!isNaN(rate)) {
-	      const percentage = Math.min(Math.max(rate, 0), 5) / 5 * 100;
-	      el.style.setProperty('--starWidth', `${percentage}%`);
-	    }
-	  });
-	});
-
-
-</script>
-
 </body>
 </html>

@@ -50,9 +50,11 @@ public class ReserveServlet extends HttpServlet {
 					return;
 				}
 				// 宿情報の取得
+				String checkBirthday = request.getParameter("checkBirthday");
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				ReserveDAO dao = new ReserveDAO();
 				HotelsBean bean = dao.findByHotel_id(hotel_id);
+				request.setAttribute("checkBirthday", checkBirthday);
 				request.setAttribute("hotel", bean);
 				// 今日の日付を取得
 				LocalDate today = LocalDate.now();

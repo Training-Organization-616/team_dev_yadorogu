@@ -14,6 +14,7 @@
 <div class="header-glass">
   <div class="container">
     <a href="/team_dev_yadorogu/HotelServlet?action=" class="logo">やどログ</a>
+    
 
     <nav class="nav-wrapper">
       <ul class="nav-links">
@@ -32,7 +33,8 @@
     </nav>
   </div>
 </div>
-<br>
+<br>	 
+	  
 	<form action="/team_dev_yadorogu/ReserveServlet?action=add" method="post">
 		<div class="center"><label>宿予約</label></div>
 		<input type="hidden" name="hotel_id" value="${hotel.id}">
@@ -88,5 +90,6 @@
 		<button class="btn btn-border"><span>予約を確定する</span></button>
 		</div>
 	</form>
+
 </body>
 </html>
