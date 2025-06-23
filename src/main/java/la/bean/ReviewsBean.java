@@ -6,17 +6,18 @@ public class ReviewsBean {
 	private int customer_id;
 	private int evaluation;
 	private String comment;
+	private String customer_name;
 
 	public ReviewsBean() {
 
 	}
 
-	public ReviewsBean(int id, int hotel_id, int customer_id, int evaluation, String comment) {
+	public ReviewsBean(int id, int hotel_id, int evaluation, String comment, String customer_name) {
 		this.id = id;
 		this.hotel_id = hotel_id;
-		this.customer_id = customer_id;
 		this.evaluation = evaluation;
 		this.comment = comment;
+		this.customer_name = customer_name;
 	}
 
 	public int getId() {
@@ -57,5 +58,13 @@ public class ReviewsBean {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getCustomer_name() {
+		return customer_name;
+	}
+
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
 	}
 }
