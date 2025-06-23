@@ -9,6 +9,7 @@
 <title>宿一覧</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+	
 </head>
 <body>
 
@@ -55,12 +56,21 @@
 <div class="card-container">
 <c:forEach items="${hotels}" var="hotel">
 <div class="hotel-card">
-
-<!-- もともとformの改支店あった場所。 -->
   
-    <h3 class="hotel-name">${hotel.name}</h3>
-
-
+		<a class="cardTitle" href="/team_dev_yadorogu/ReviewServlet?hotel_id=${hotel.id}">${hotel.name}</a>
+		
+		    <!-- ★評価部分 -->
+    <c:choose>
+      <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
+        <p class="stersize">未評価</p>
+      </c:when>
+      <c:otherwise>
+<p class="stersize">
+    <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
+    <strong>星${hotel.avgevaluation}</strong>
+</p>
+      </c:otherwise>
+    </c:choose>
 
 <p><strong>1泊：</strong>
   <fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円
@@ -73,18 +83,18 @@
     <p><strong>チェックアウト：</strong>${hotel.checkout}</p>
     
 
-    <!-- ★評価部分 -->
-    <c:choose>
-      <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
-        <p class="stersize">未評価</p>
-      </c:when>
-      <c:otherwise>
-<p class="stersize">
-    <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
-    <strong>星${hotel.avgevaluation}</strong>
-</p>
-      </c:otherwise>
-    </c:choose>
+     
+<!--    <c:choose>-->
+<!--      <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">-->
+<!--        <p class="stersize">未評価</p>-->
+<!--      </c:when>-->
+<!--      <c:otherwise>-->
+<!--<p class="stersize">-->
+<!--    <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>-->
+<!--    <strong>星${hotel.avgevaluation}</strong>-->
+<!--</p>-->
+<!--      </c:otherwise>-->
+<!--    </c:choose>-->
     
     <div class="button-wrapper">
 	<form action="/team_dev_yadorogu/ReserveServlet" method="get" >

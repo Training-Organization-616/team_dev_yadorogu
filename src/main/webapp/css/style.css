@@ -257,9 +257,9 @@ body {
 }
 .button-wrapper {
   display: flex;
-  justify-content: center; /* 横方向中央寄せ */
-  gap: 10px; /* ボタン間のスペース */
-  margin-top: 5px;
+  justify-content: center !important; /* 横方向中央寄せ */
+  gap: 20px; /* ボタン間のスペース */
+  margin-top: 10px;
 }
 
 .button-wrapper form {
@@ -701,4 +701,14 @@ label{
 .button-wrapper {
   display: flex;
   justify-content: flex-end; /* 右寄せ */
+}
+
+.cardTitle {
+	color: #b08968; 
+	font-size: 30px;
+	text-decoration:none;
+}
+
+.cardTitle:hover{
+	color: #6D5F4E;
 }
