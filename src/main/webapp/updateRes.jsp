@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<th>料金</th>
-				<td><fmt:formatNumber value="${rbean.price}" type="number" groupingUsed="true" />円</td>
+				<td><fmt:formatNumber value="${hbean.price}" type="number" groupingUsed="true" />円</td>
 			</tr>
 			<tr>
 				<th>チェックイン時間</th>
