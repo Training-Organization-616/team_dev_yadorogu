@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.stars{
+	display: flex;
+	flex-direction: row-reverse; /* 逆順に並べる */
+	justify-content: flex-end;
+}
+
+.stars input {
+	display: none; /* ラジオボタン消す */
+}
+
+/* 押してないときの色 */
+.stars label{
+	color: #CCCCCC;
+	font-size: 25px;
+}
+
+/* 重ねたり押したりすると色が変化 */
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input[type='radio']:checked ~ label{
+	color: #ffcf32;
+}
