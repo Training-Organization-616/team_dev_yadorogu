@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <title>口コミ投稿</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/review.css">
-<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/review.css">
 </head>
 <body>
 
@@ -73,6 +73,7 @@
 				</p></td>
 		</tr>
 	</table>
+	<br>
 	<div class="reviewcenter">
 		<div class="reviewform">
 			<form action="/team_dev_yadorogu/ReviewServlet?action=addReview"
