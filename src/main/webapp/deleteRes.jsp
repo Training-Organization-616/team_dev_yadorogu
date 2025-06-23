@@ -42,11 +42,11 @@
 	<div class="mess">
 		<c:choose>
 			<c:when test="${rbean.check==50}">
-				<strong class="mes">利用日まであと3日以内のためキャンセル料50%、<fmt:formatNumber value="${hbean.price * 0.5}" pattern="#,##0"/>円がかかります。
+				<strong class="mes">チェックイン日まであと3日以内のためキャンセル料50%、<fmt:formatNumber value="${hbean.price * 0.5}" pattern="#,##0"/>円がかかります。
 				</strong>
 			</c:when>
 			<c:when test="${rbean.check==20}">
-				<strong class="mes">利用日まであと7日以内のためキャンセル料20%、<fmt:formatNumber value="${hbean.price * 0.2}" pattern="#,##0"/>円がかかります。
+				<strong class="mes">チェックイン日まであと7日以内のためキャンセル料20%、<fmt:formatNumber value="${hbean.price * 0.2}" pattern="#,##0"/>円がかかります。
 				</strong>
 			</c:when>
 			<c:otherwise>

@@ -35,7 +35,7 @@
 </div>
 <br>
 
-<div class="mess"><strong class="mes">予約の変更、キャンセルは利用日の1日前までです</strong></div>
+<div class="mess"><strong class="mes">予約の変更、キャンセルはチェックイン日の1日前までです</strong></div>
 	
 	<br><table>
 		<tr>
