@@ -9,6 +9,7 @@
 <title>宿一覧</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+
 	
 </head>
 <body>
@@ -73,7 +74,7 @@
     </c:choose>
 
 <p><strong>1泊：</strong>
-  <fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円
+  <span class="price"><fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円</span>
 </p>
 
 
