@@ -40,13 +40,15 @@
 <form action="/team_dev_yadorogu/HotelServlet" method="get">
 
 	<select name="sortHotels">
-		<option selected disabled>--選択してください--</option>
+		<option selected disabled value="">--選択してください--</option>
 		<option value="evaluationDesc">評価高い順</option>
 		<option value="evaluationAsc">評価低い順</option>
 		<option value="feeDesc">料金高い順</option>
 		<option value="feeAsc">料金低い順</option>
 		<option value="checkinDesc">チェックイン遅い順</option>
 		<option value="checkinAsc">チェックイン早い順</option>
+		<option value="checkoutDesc">チェックアウト遅い順</option>
+		<option value="checkoutAsc">チェックアウト早い順</option>
 	</select>
 	
 	<button>並び替える</button>

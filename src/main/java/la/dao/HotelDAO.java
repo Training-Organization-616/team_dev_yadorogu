@@ -352,6 +352,50 @@ public class HotelDAO {
 					+ ") r ON h.id = r.hotel_id\n"
 					+ "JOIN categories c ON h.category_id = c.id\n"
 					+ "ORDER BY checkin asc";
+			//チェックアウト時間遅い順
+		} else if (sortHotels.equals("checkoutDesc")) {
+			sql = "SELECT\n"
+					+ "  h.id,\n"
+					+ "  h.name,\n"
+					+ "  c.name AS category_name,\n"
+					+ "  h.checkin,\n"
+					+ "  h.checkout,\n"
+					+ "  h.price,\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
+					+ "FROM hotels h\n"
+					+ "LEFT JOIN (\n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
+					+ "  GROUP BY hotel_id\n"
+					+ ") r ON h.id = r.hotel_id\n"
+					+ "JOIN categories c ON h.category_id = c.id\n"
+					+ "ORDER BY checkout desc";
+			//チェックアウト早い順
+		} else if (sortHotels.equals("checkoutAsc")) {
+			sql = "SELECT\n"
+					+ "  h.id,\n"
+					+ "  h.name,\n"
+					+ "  c.name AS category_name,\n"
+					+ "  h.checkin,\n"
+					+ "  h.checkout,\n"
+					+ "  h.price,\n"
+					+ "  COALESCE(r.avg, 0) AS avg,\n"
+					+ "  COALESCE(r.count, 0) AS comment_count\n"
+					+ "FROM hotels h\n"
+					+ "LEFT JOIN (\n"
+					+ "  SELECT\n"
+					+ "    hotel_id,\n"
+					+ "    ROUND(AVG(evaluation), 1) AS avg,\n"
+					+ "    COUNT(*) AS count\n"
+					+ "  FROM reviews\n"
+					+ "  GROUP BY hotel_id\n"
+					+ ") r ON h.id = r.hotel_id\n"
+					+ "JOIN categories c ON h.category_id = c.id\n"
+					+ "ORDER BY checkout asc";
 		}
 		try (
 				// データベースへの接続

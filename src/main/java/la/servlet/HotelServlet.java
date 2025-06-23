@@ -128,8 +128,16 @@ public class HotelServlet extends HttpServlet {
 			} else if (action.equals("sort")) {
 				//並び替えのためのパラメータ取得
 				String sortHotels = request.getParameter("sortHotels");
-				//daoオブジェクト作成して、ソート機能実行(listで受け取る)
 				HotelDAO dao = new HotelDAO();
+				//何も選択せずにボタン押したとき
+				if (sortHotels == null || sortHotels.length() == 0) {
+					//"findAll"で宿情報一覧取得
+					List<HotelsBean> list = dao.findAll();
+					request.setAttribute("hotels", list);
+					gotoPage(request, response, "/customertop.jsp");
+				}
+				//ソート機能実行(listで受け取る)
+				dao = new HotelDAO();
 				List<HotelsBean> list = dao.sortByHotels(sortHotels);
 				//listを"hotels"で保存
 				request.setAttribute("hotels", list);
