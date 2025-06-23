@@ -3,7 +3,7 @@
 .stars{
 	display: flex;
 	flex-direction: row-reverse; /* 逆順に並べる */
-	justify-content: flex-end;
+	justify-content:center;
 }
 
 .stars input {
@@ -21,4 +21,22 @@
 .stars label:hover ~ label,
 .stars input[type='radio']:checked ~ label{
 	color: #ffcf32;
+}
+
+.reviewcenter{
+	
+	text-align: center!important;
+	margin-top: 20px;
+}
+
+.reviewform{
+	background: #fff;
+	border-radius: 8px;
+	padding: 12px 16px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+	width: 100%;
+	max-width: 700px;
+	min-height: 60px;
+	box-sizing: border-box;
+	gap: 16px;
 }

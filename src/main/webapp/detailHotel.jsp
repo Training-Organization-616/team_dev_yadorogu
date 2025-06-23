@@ -49,7 +49,7 @@
 	<tr><th>料金</th><td><fmt:formatNumber value="${hotel.price}" type="number" groupingUsed="true" />円</td></tr>
 	<tr><th>チェックイン時間</th><td>${hotel.checkin}</td></tr>
 	<tr><th>チェックアウト時間</th><td>${hotel.checkout}</td></tr>
-	<tr><th>最大宿泊人数</th><td>${hotel.maxperson}</td></tr>
+	<tr><th>最大宿泊人数</th><td>${hotel.maxperson}人</td></tr>
 	<tr><th>カテゴリ</th><td>${hotel.category_name}</td></tr>
 	<tr><th>平均評価</th><td><p class="stersize">
     <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
