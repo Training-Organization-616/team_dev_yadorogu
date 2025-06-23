@@ -78,7 +78,7 @@
 			</tr>
 			<tr>
 				<th>人数</th>
-				<td>${rbean.persons}</td>
+				<td>${rbean.persons}人</td>
 			<tr>
 				<th>チェックイン日</th>
 				<td>${rbean.date}</td>

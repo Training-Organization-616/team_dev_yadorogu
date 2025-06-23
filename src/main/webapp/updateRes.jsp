@@ -63,7 +63,7 @@
 						
 							<option value="${i}" <c:if test="${i==rbean.persons}">selected</c:if>>${i}</option>
 						</c:forEach>
-				</select> 
+				</select>人
 				</td>
 			<tr>
 				<th>チェックイン日</th>
