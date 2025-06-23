@@ -37,9 +37,8 @@
 </div>
 
 <div class="search-outside">
-<form action="/team_dev_yadorogu/HotelServlet" method="get">
-
-	<select name="sortHotels">
+<form action="/team_dev_yadorogu/HotelServlet?action=sort" method="post">
+	<select name="sortHotels" onchange="submit(this.form)">
 		<option selected disabled value="">--選択してください--</option>
 		<option value="evaluationDesc">評価高い順</option>
 		<option value="evaluationAsc">評価低い順</option>
@@ -50,9 +49,6 @@
 		<option value="checkoutDesc">チェックアウト遅い順</option>
 		<option value="checkoutAsc">チェックアウト早い順</option>
 	</select>
-	
-	<button>並び替える</button>
-	<input type="hidden" name="action" value="sort">
 </form>
 </div>
 
