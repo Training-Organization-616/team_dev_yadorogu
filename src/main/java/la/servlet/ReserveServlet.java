@@ -21,10 +21,10 @@ import la.dao.ReserveDAO;
 @WebServlet("/ReserveServlet")
 public class ReserveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ReserveServlet() {
-        super();
-    }
+
+	public ReserveServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -37,14 +37,14 @@ public class ReserveServlet extends HttpServlet {
 				// パラメータなしの場合は予約確認画面を表示
 				// セッションが切れていないかチェック
 				HttpSession session = request.getSession(false);
-				if(session == null) {
+				if (session == null) {
 					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
 				// ログインしているかチェック
-				CustomersBean customer = (CustomersBean)session.getAttribute("user");
-				if(customer == null) {
+				CustomersBean customer = (CustomersBean) session.getAttribute("user");
+				if (customer == null) {
 					request.setAttribute("message", "ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
@@ -66,7 +66,7 @@ public class ReserveServlet extends HttpServlet {
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				ReserveDAO dao = new ReserveDAO();
 				// 入力されているかチェック
-				if(date == null || date.length() == 0) {
+				if (date == null || date.length() == 0) {
 					HotelsBean bean = dao.findByHotel_id(hotel_id);
 					request.setAttribute("hotel", bean);
 					request.setAttribute("message", "チェックイン日が入力されていません");
@@ -74,7 +74,7 @@ public class ReserveServlet extends HttpServlet {
 					return;
 				}
 				HttpSession session = request.getSession();
-				CustomersBean customer = (CustomersBean)session.getAttribute("user");
+				CustomersBean customer = (CustomersBean) session.getAttribute("user");
 				// 同じ日に予約していないかチェック
 				if (dao.findByCustomer_idAndDate(customer.getId(), date)) {
 					HotelsBean bean = dao.findByHotel_id(hotel_id);
@@ -91,14 +91,14 @@ public class ReserveServlet extends HttpServlet {
 				// 予約一覧画面を表示
 				// セッションが切れていないかチェック
 				HttpSession session = request.getSession(false);
-				if(session == null) {
+				if (session == null) {
 					request.setAttribute("message", "セッションが切れています。もう一度ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
-				CustomersBean customer = (CustomersBean)session.getAttribute("user");
+				CustomersBean customer = (CustomersBean) session.getAttribute("user");
 				// ログインしているかチェック
-				if(customer == null) {
+				if (customer == null) {
 					request.setAttribute("message", "ログインして下さい。");
 					gotoPage(request, response, "login.jsp");
 					return;
@@ -106,10 +106,45 @@ public class ReserveServlet extends HttpServlet {
 				// 予約一覧を取得
 				ReserveDAO dao = new ReserveDAO();
 				List<ReservationsBean> list = dao.findByCustomer_id(customer.getId());
+
 				request.setAttribute("reservation", list);
 				gotoPage(request, response, "history.jsp");
 
-			} else {
+			} //変更ページへ遷移
+			else if (action.equals("updatescreen")) {
+				int res_id = Integer.parseInt(request.getParameter("res_id"));
+				ReserveDAO dao = new ReserveDAO();
+
+				ReservationsBean rbean = dao.findByres_id(res_id);
+				HotelsBean hbean = dao.findByHotel_id(rbean.getHotel_id());
+
+				request.setAttribute("rbean", rbean);
+				request.setAttribute("hbean", hbean);
+				gotoPage(request, response, "updateRes.jsp");
+			} //変更の実施
+			else if (action.equals("updateRes")) {
+				int res_id = Integer.parseInt(request.getParameter("res_id"));
+				int persons = Integer.parseInt(request.getParameter("persons"));
+				ReserveDAO dao = new ReserveDAO();
+				dao.updateRes(res_id, persons);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("ReserveServlet?action=history");
+				dispatcher.forward(request, response);
+
+			}
+			//予約の削除
+			else if (action.equals("deleteRes")) {
+				int res_id = Integer.parseInt(request.getParameter("res_id"));
+
+				ReserveDAO dao = new ReserveDAO();
+				dao.deleteRes(res_id);
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("ReserveServlet?action=history");
+				dispatcher.forward(request, response);
+
+			}
+
+			else {
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
 			}

@@ -109,39 +109,39 @@ public class ReserveDAO {
 			throw new DAOException("レコードの取得に失敗しました。");
 		}
 	}
-	
+
 	// 同じ日に予約しているか検索
-		public boolean findByCustomer_idAndDate(int customer_id, String date) throws DAOException {
-			// SQL文の作成
-			String sql = "SELECT * FROM reservations WHERE customer_id=? AND date=?::DATE";
+	public boolean findByCustomer_idAndDate(int customer_id, String date) throws DAOException {
+		// SQL文の作成
+		String sql = "SELECT * FROM reservations WHERE customer_id=? AND date=?::DATE";
 
-			try (// データベースへの接続
-					Connection con = DriverManager.getConnection(url, user, pass);
-					// PreparedStatementオブジェクトの取得
-					PreparedStatement st = con.prepareStatement(sql);) {
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
 
-				st.setInt(1, customer_id);
-				st.setString(2, date);
+			st.setInt(1, customer_id);
+			st.setString(2, date);
 
-				try (
-						// SQLの実行
-						ResultSet rs = st.executeQuery();) {
-					// 結果の取得
-					boolean isExist = false;
-					if (rs.next()) {
-						isExist = true;
-					}
-					// 結果を返す
-					return isExist;
-				} catch (SQLException e) {
-					e.printStackTrace();
-					throw new DAOException("レコードの取得に失敗しました。");
+			try (
+					// SQLの実行
+					ResultSet rs = st.executeQuery();) {
+				// 結果の取得
+				boolean isExist = false;
+				if (rs.next()) {
+					isExist = true;
 				}
+				// 結果を返す
+				return isExist;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new DAOException("レコードの取得に失敗しました。");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
 		}
+	}
 
 	// 予約情報を追加
 	public void addReserve(int hotel_id, int customer_id, int persons, String date) throws DAOException {
@@ -165,6 +165,80 @@ public class ReserveDAO {
 			throw new DAOException("レコードの取得に失敗しました。");
 		}
 	}
-	
-	
+
+	public ReservationsBean findByres_id(int res_id) throws DAOException {
+		// SQL文の作成
+		String sql = "SELECT * FROM reservations  WHERE id = ?";
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+
+			st.setInt(1, res_id);
+
+			try (
+					// SQLの実行
+					ResultSet rs = st.executeQuery();) {
+				// 結果の取得および表示
+				ReservationsBean bean = new ReservationsBean();
+
+				if (rs.next()) {
+					int id = rs.getInt("id");
+					int hotel_id = rs.getInt("hotel_id");
+					int customer_id = rs.getInt("customer_id");
+					int persons = rs.getInt("persons");
+					String date = rs.getString("date");
+					bean = new ReservationsBean(id, customer_id, hotel_id, persons, date);
+				}
+
+				// ホテル情報を返す
+				return bean;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new DAOException("レコードの取得に失敗しました。");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
+
+	public void updateRes(int res_id, int persons) throws DAOException {
+		// SQL文の作成
+		String sql = "update reservations set persons=?  where id =?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+
+			st.setInt(1, persons);
+			st.setInt(2, res_id);
+			// SQLの実行
+			st.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
+
+	public void deleteRes(int res_id) throws DAOException {
+		// SQL文の作成
+		String sql = "delete from reservations  where id =?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+
+			st.setInt(1, res_id);
+			// SQLの実行
+			st.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
 }

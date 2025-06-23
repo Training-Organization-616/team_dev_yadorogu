@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="java.text.SimpleDateFormat, java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -33,14 +34,22 @@
   </div>
 </div>
 <br>
-	<table>
+
+<div class="mess"><strong class="mes">予約の変更、キャンセルは利用日の1日前までです</strong></div>
+	
+	<br><table>
 		<tr>
 			<th>NO</th>
 			<th>宿名</th>
 			<th>価格</th>
 			<th>人数</th>
 			<th>チェックイン日</th>
+			<th>変更</th>
+			<th>キャンセル</th>
 		</tr>
+		
+		
+		
 		<c:forEach items="${reservation}" var="reserve">
 			<tr>
 				<td>${reserve.id}</td>
@@ -48,8 +57,39 @@
 				<td><fmt:formatNumber value="${reserve.price}" type="number" groupingUsed="true" />円</td>
 				<td>${reserve.persons}人</td>
 				<td>${reserve.date}</td>
+				
+		
+				
+<!--				日にちの判断-->
+				<td>
+				<c:if test="${reserve.checkday}">
+				<form action="/team_dev_yadorogu/ReserveServlet?action=updatescreen" method="post">
+				<input type="hidden" name="res_id" value="${reserve.id}">
+				<button>変更</button>
+				</form></c:if>
+				</td>
+				<td>
+				<c:if test="${reserve.checkday}">
+				<form action="/team_dev_yadorogu/ReserveServlet?action=deleteRes" method="post">
+				<input type="hidden" name="res_id" value="${reserve.id}">
+				<button onclick="MoveCheck(event);">キャンセル</button>
+				</form></c:if></td>
+				
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<script type="text/javascript">
+//ダイアログでの処理
+function MoveCheck(event) {
+    if( confirm("予約のキャンセルを行いますか?") ) {
+        // OKが押された場合は、何もせずにフォーム送信
+    } else {
+        // キャンセルが押された場合、フォーム送信を防ぐ
+        event.preventDefault();
+    }
+}
+
+</script>
 </body>
 </html>

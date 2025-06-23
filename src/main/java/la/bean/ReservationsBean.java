@@ -1,5 +1,8 @@
 package la.bean;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ReservationsBean {
 	//プロパティ
 	private int id;
@@ -22,7 +25,7 @@ public class ReservationsBean {
 		this.persons = persons;
 		this.date = date;
 	}
-	
+
 	public ReservationsBean(int id, String hotel_name, int price, int persons, String date) {
 		this.id = id;
 		this.hotel_name = hotel_name;
@@ -86,6 +89,13 @@ public class ReservationsBean {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public boolean ischeckday() {
+		LocalDate day = LocalDate.now();
+		LocalDate twoday = day.plusDays(1);
+		LocalDate test = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return test.isAfter(twoday);
 	}
 
 }
