@@ -51,10 +51,19 @@
 	<tr><th>チェックアウト時間</th><td>${hotel.checkout}</td></tr>
 	<tr><th>最大宿泊人数</th><td>${hotel.maxperson}人</td></tr>
 	<tr><th>カテゴリ</th><td>${hotel.category_name}</td></tr>
-	<tr><th>平均評価</th><td><p class="stersize">
+	<tr><th>平均評価</th><td>
+	<c:choose>
+      <c:when test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
+        <p class="stersize">未評価</p>
+      </c:when>
+      <c:otherwise>
+	<p class="stersize">
     <span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
     <strong>星${hotel.avgevaluation}</strong>
-</p></td></tr>
+	</p>
+	</c:otherwise>
+	</c:choose>
+</td></tr>
 </table>
 
 <div class="review-cards">

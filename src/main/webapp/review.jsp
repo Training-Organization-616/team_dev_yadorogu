@@ -67,10 +67,20 @@
 		</tr>
 		<tr>
 			<th>平均評価</th>
-			<td><p class="stersize">
-					<span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
-					<strong>星${hotel.avgevaluation}</strong>
-				</p></td>
+			<td>
+				<c:choose>
+					<c:when
+						test="${hotel.avgevaluation == null || hotel.avgevaluation == 0}">
+						<p class="stersize">未評価</p>
+					</c:when>
+					<c:otherwise>
+						<p class="stersize">
+							<span class="star5_rating" data-rate="${hotel.avgevaluation}"></span>
+							<strong>星${hotel.avgevaluation}</strong>
+						</p>
+					</c:otherwise>
+				</c:choose>
+			</td>
 		</tr>
 	</table>
 	<br>
@@ -81,13 +91,11 @@
 				<input type="hidden" name="hotel_id" value="${hotel.id}">
 				<div class="stars">
 					<input id="star5" type="radio" name="evaluation" value="5">
-					<label for="star5">★</label>
-					<input id="star4" type="radio" name="evaluation" value="4">
-					<label for="star4">★</label>
+					<label for="star5">★</label> <input id="star4" type="radio"
+						name="evaluation" value="4"> <label for="star4">★</label>
 					<input id="star3" type="radio" name="evaluation" value="3">
-					<label for="star3">★</label>
-					<input id="star2" type="radio" name="evaluation" value="2">
-					<label for="star2">★</label>
+					<label for="star3">★</label> <input id="star2" type="radio"
+						name="evaluation" value="2"> <label for="star2">★</label>
 					<input id="star1" type="radio" name="evaluation" value="1" checked>
 					<label for="star1">★</label>
 				</div>
