@@ -69,12 +69,13 @@
 <div class="review-cards">
   <c:forEach items="${reviews}" var="review">
     <div class="review-card">
-      <p class="name"><strong>${review.customer_name}</strong></p>
-      <p class="stersize">
-      <strong>星${review.evaluation}</strong>
-        <span class="star5_rating" data-rate="${review.evaluation}"></span>
-        
-      </p>
+      <div class="review-content">
+        <p class="name"><strong>${review.customer_name}</strong></p>
+        <p class="stersize">
+          <strong>星${review.evaluation}</strong>
+          <span class="star5_rating" data-rate="${review.evaluation}"></span>
+        </p>
+      </div>
 
       <div class="balloon5">
         <div class="faceicon">
@@ -82,13 +83,15 @@
         </div>
         <div class="chatting">
           <div class="says">
-            <p><c:out value="${review.comment}"></c:out></p>
+            <p>${review.comment}</p>
           </div>
         </div>
       </div>
     </div>
   </c:forEach>
 </div>
+
+
 
 <div class="bottomFooter__topBtn" onclick="scrollToTop()">TOP</div>
 

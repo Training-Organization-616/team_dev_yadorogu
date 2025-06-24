@@ -371,7 +371,7 @@ body {
   width: 80px;
 }
 
-.balloon5 .faceicon img{
+.balloon5 .faceicon img {
   width: 100%;
   height: auto;
   background-color: rgb(128, 255, 128);
@@ -385,7 +385,7 @@ body {
 
 .says {
   display: inline-block;
-  position: relative; 
+  position: relative;
   margin: 5px 0 0 105px;
   padding: 17px 13px;
   border-radius: 12px;
@@ -397,7 +397,7 @@ body {
   content: "";
   display: inline-block;
   position: absolute;
-  top: 18px; 
+  top: 18px;
   left: -24px;
   border: 12px solid transparent;
   border-right: 12px solid #d7ebfe;
@@ -407,9 +407,10 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .review-cards {
   display: flex;
-  flex-direction: column;  /* 縦に並べる */
+  flex-direction: column; /* 縦に並べる */
   gap: 12px;
   align-items: center;
   margin-top: 20px;
@@ -438,6 +439,8 @@ body {
 .review-content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding-left: 16px;
   gap: 4px;
 }
 
@@ -448,6 +451,10 @@ body {
   overflow: visible;
   text-overflow: unset;
 }
+
+
+
+
 
 
 
