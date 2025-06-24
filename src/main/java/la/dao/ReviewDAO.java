@@ -32,7 +32,7 @@ public class ReviewDAO {
 	//　ホテルをIDで検索
 	public HotelsBean findHotelByHotel_id(int hotel_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT h.id, h.name, h.checkin, h.checkout, h.price, h.maxperson, c.name AS category_name, r.avg FROM hotels h JOIN categories c ON h.category_id = c.id LEFT JOIN (SELECT hotel_id, round(avg(evaluation),1) as avg FROM reviews GROUP BY hotel_id) r ON h.id = r.hotel_id WHERE h.id = ? ORDER BY h.id;";
+		String sql = "SELECT h.id, h.name, h.checkin, h.checkout, h.price, h.maxperson, c.name AS category_name, r.avg FROM hotels h JOIN categories c ON h.category_id = c.id LEFT JOIN (SELECT hotel_id, round(avg(evaluation),1) as avg FROM reviews GROUP BY hotel_id) r ON h.id = r.hotel_id WHERE h.id = ? ORDER BY h.id";
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
@@ -77,7 +77,7 @@ public class ReviewDAO {
 	//　宿の口コミを検索
 	public List<ReviewsBean> findReviewsByHotel_id(int hotel_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT r.id, r.evaluation, r.comment, c.name FROM reviews r JOIN customers c ON r.customer_id = c.id WHERE hotel_id = ? ORDER BY r.id";
+		String sql = "SELECT r.id, r.evaluation, r.comment, c.name FROM reviews r JOIN customers c ON r.customer_id = c.id WHERE hotel_id = ? ORDER BY r.id DESC";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
