@@ -276,31 +276,29 @@ body {
 .search-outside form {
   display: flex;
   gap: 6px;
-  background-color: #ffffff;
+  background-color: #A89B8C;
   padding: 6px 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #ddd;
+   border-radius: 4px;
+/*  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);*/
+/*  border: 1px solid #A89B8C;*/
 }
 
 
 .search-outside input[type="text"] {
   padding: 6px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 18px;
+  
 }
 
 .search-outside button {
-  background-color: #C6A57A;
-  color: #fff;
+  background-color: #A89B8C;
+  color: #A89B8C;
   border: none;
   padding: 6px 12px;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
 }
-
 
 .star5_rating[data-rate="0.0"]:after { width: 0%; }
 .star5_rating[data-rate="0.1"]:after { width: 2%; }

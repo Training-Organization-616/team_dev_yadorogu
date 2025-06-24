@@ -37,9 +37,10 @@
 </div>
 
 <div class="search-outside">
+
 <form action="/team_dev_yadorogu/HotelServlet?action=sort" method="post">
-	<select name="sortHotels" onchange="submit(this.form)">
-		<option selected disabled value="">--選択してください--</option>
+	<select name="sortHotels" onchange="submit(this.form)" >
+		<option selected disabled value="" >--選択してください--</option>
 		<option value="evaluationDesc">評価高い順</option>
 		<option value="evaluationAsc">評価低い順</option>
 		<option value="feeDesc">料金高い順</option>
@@ -50,6 +51,7 @@
 		<option value="checkoutAsc">チェックアウト早い順</option>
 	</select>
 </form>
+
 </div>
 
 
@@ -110,6 +112,7 @@
   function scrollToTop() { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
 </script>
 
 </body>
