@@ -390,6 +390,7 @@ body {
   padding: 17px 13px;
   border-radius: 12px;
   background: #d7ebfe;
+  min-height: 21px;
 }
 
 .says:after {
