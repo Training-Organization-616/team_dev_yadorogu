@@ -104,7 +104,7 @@
 				<c:if test="${customer.admin}">
 				<form action="/team_dev_yadorogu/AdminServlet?action=delete" method="post">
 				<input type="hidden" name="id" value="${customer.id}">
-				<button onclick="MoveCheck(event);">退会</button>
+				<button onclick="MoveCheck(event);" id="buttonDelete">退会</button>
 				</form>
 				</c:if>
 				</td>

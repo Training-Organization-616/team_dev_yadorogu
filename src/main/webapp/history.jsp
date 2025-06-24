@@ -72,7 +72,7 @@
 				<c:if test="${reserve.checkday}">
 				<form action="/team_dev_yadorogu/ReserveServlet?action=deletescreen" method="post">
 				<input type="hidden" name="res_id" value="${reserve.id}">
-				<button>キャンセル</button>
+				<button id="buttonDelete">キャンセル</button>
 				</form></c:if></td>
 				
 			</tr>

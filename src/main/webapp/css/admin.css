@@ -123,6 +123,10 @@ body {
 	  background-color: rgba(86, 75, 63, 0.05); /* ← 第一ヘッダー系の色を超薄く */
 	  border-top: 1px solid rgba(86, 75, 63, 0.08);
 }
+#buttonDelete{
+	background-color: rgb(255, 0, 0);
+	color: #ffffff;
+}
 
 .header-bottom {
   display: flex;

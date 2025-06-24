@@ -75,7 +75,7 @@
 				<td>
 				<form action="/team_dev_yadorogu/HotelServlet?action=deleteHotel" method="post">
 				<input type="hidden" name="id" value="${hotel.id}">
-				<button onclick="MoveCheck(event);">削除</button>
+				<button onclick="MoveCheck(event);" id="buttonDelete">削除</button>
 				</form>
 				</td>
 			</tr>
