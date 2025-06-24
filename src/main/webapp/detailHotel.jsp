@@ -82,7 +82,7 @@
         </div>
         <div class="chatting">
           <div class="says">
-            <p>${review.comment}</p>
+            <p><c:out value="${review.comment}"></c:out></p>
           </div>
         </div>
       </div>
