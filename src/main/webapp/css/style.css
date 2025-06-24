@@ -404,6 +404,7 @@ body {
 .says p {
   margin: 0;
   padding: 0;
+  white-space: pre-wrap;
 }
 
 .review-cards {
