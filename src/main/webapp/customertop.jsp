@@ -37,19 +37,33 @@
 </div>
 
 <div class="search-outside">
-
 <form action="/team_dev_yadorogu/HotelServlet?action=sort" method="post">
-	<select name="sortHotels" onchange="submit(this.form)" >
-		<option selected disabled value="" >--選択してください--</option>
-		<option value="evaluationDesc">評価高い順</option>
-		<option value="evaluationAsc">評価低い順</option>
-		<option value="feeDesc">料金高い順</option>
-		<option value="feeAsc">料金低い順</option>
-		<option value="checkinDesc">チェックイン遅い順</option>
-		<option value="checkinAsc">チェックイン早い順</option>
-		<option value="checkoutDesc">チェックアウト遅い順</option>
-		<option value="checkoutAsc">チェックアウト早い順</option>
-	</select>
+  <div class="custom-dropdown">
+    <button type="button" class="dropdown-toggle" onclick="toggleDropdown()">
+      <span id="selected-value"><strong>--選択してください--</strong></span>
+<span class="dropdown-arrows" style="display: inline-flex; flex-direction: row;font-size: 20px ; line-height: 1;">
+  <span style="font-size: 20px;"><strong>&#8645;</strong></span>
+</span>
+    </button>
+    <ul class="dropdown-menu">
+      <li onclick="selectOption('evaluationDesc', '評価高い順')"><strong>評価高い順</strong></li>
+      <hr>
+      <li onclick="selectOption('evaluationAsc', '評価低い順')"><strong>評価低い順</strong></li>
+      <hr>
+      <li onclick="selectOption('feeDesc', '料金高い順')"><strong>料金高い順</strong></li>
+      <hr>
+      <li onclick="selectOption('feeAsc', '料金低い順')"><strong>料金低い順</strong></li>
+      <hr>
+      <li onclick="selectOption('checkinDesc', 'チェックイン遅い順')"><strong>チェックイン遅い順</strong></li>
+      <hr>
+      <li onclick="selectOption('checkinAsc', 'チェックイン早い順')"><strong>チェックイン早い順</strong></li>
+      <hr>
+      <li onclick="selectOption('checkoutDesc', 'チェックアウト遅い順')"><strong>チェックアウト遅い順</strong></li>
+      <hr>
+      <li onclick="selectOption('checkoutAsc', 'チェックアウト早い順')"><strong>チェックアウト早い順</strong></li>
+    </ul>
+    <input type="hidden" name="sortHotels" id="sort-value" />
+  </div>
 </form>
 
 </div>
@@ -112,8 +126,19 @@
   function scrollToTop() { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
 </script>
-
+<script type="text/javascript">
+const dropdown = document.querySelector('.custom-dropdown');
+const toggleButton = document.querySelector('.dropdown-toggle');
+ 
+toggleButton.addEventListener('click', () => {
+  dropdown.classList.toggle('open'); // ドロップダウンの開閉を切り替え
+});
+function selectOption(value, label) {
+    document.getElementById('selected-value').textContent = label;
+    document.getElementById('sort-value').value = value;
+    document.querySelector('form').submit();
+  }
+</script>
 </body>
 </html>

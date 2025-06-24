@@ -273,33 +273,93 @@ body {
 	z-index: 1100; /* ヘッダーより上に */
 }
 
-.search-outside form {
-  display: flex;
-  gap: 6px;
-  background-color: #A89B8C;
-  padding: 6px 10px;
-   border-radius: 4px;
-/*  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);*/
-/*  border: 1px solid #A89B8C;*/
-}
-
-
-.search-outside input[type="text"] {
-  padding: 6px 10px;
-  font-size: 18px;
-  
-}
 
 .search-outside button {
-  background-color: #A89B8C;
-  color: #A89B8C;
+  background-color: rgba(86, 75, 63, 0.7);
+  color: rgb(255, 255, 255);
   border: none;
   padding: 6px 12px;
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
 }
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 200px; /* 必要に応じて調整可能 */
+}
+ 
+.dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1px;
+  width: 100%;
+  background-color: #0078d4; /* ボタンの背景色 */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+ 
+.dropdown-arrows {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+/*  margin-left: 8px;*/
+/*  margin-right: 6px;*/
+/*  padding: aout;*/
+  font-size: 10px;
+  color: white;
+}
 
+.arrow-up,
+.arrow-down {
+  font-size: 12px;
+  transition: opacity 0.3s ease; /* スムーズな切り替え */
+}
+ 
+.arrow-up {
+  opacity: 0; /* 初期状態で非表示 */
+}
+ 
+.dropdown-menu {
+  display: none; /* 初期状態で非表示 */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: rgb(246, 246, 246);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin: 5px 0 0;
+  list-style: none;
+  padding: 0;
+}
+ 
+.dropdown-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+ 
+.dropdown-menu li:hover {
+  background-color: #f0f0f0; /* ホバー時の背景色 */
+}
+ 
+.custom-dropdown.open .dropdown-menu {
+  display: block; /* メニューを表示 */
+}
+ 
+.custom-dropdown.open .arrow-up {
+  opacity: 1; /* 上向き矢印を表示 */
+}
+ 
+.custom-dropdown.open .arrow-down {
+  opacity: 0; /* 下向き矢印を非表示 */
+}
 .star5_rating[data-rate="0.0"]:after { width: 0%; }
 .star5_rating[data-rate="0.1"]:after { width: 2%; }
 .star5_rating[data-rate="0.2"]:after { width: 4%; }
