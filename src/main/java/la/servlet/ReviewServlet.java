@@ -46,6 +46,7 @@ public class ReviewServlet extends HttpServlet {
 				ReviewDAO dao = new ReviewDAO();
 				HotelsBean bean = dao.findHotelByHotel_id(hotel_id);
 				request.setAttribute("hotel", bean);
+				// 口コミ情報の取得
 				List<ReviewsBean> list = dao.findReviewsByHotel_id(hotel_id);
 				request.setAttribute("reviews", list);
 				gotoPage(request, response, "detailHotel.jsp");
@@ -66,6 +67,7 @@ public class ReviewServlet extends HttpServlet {
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
+				// 口コミ情報の取得
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				ReviewDAO dao = new ReviewDAO();
 				HotelsBean bean = dao.findHotelByHotel_id(hotel_id);
@@ -82,6 +84,7 @@ public class ReviewServlet extends HttpServlet {
 					gotoPage(request, response, "login.jsp");
 					return;
 				}
+				// 口コミ情報の追加
 				CustomersBean customer = (CustomersBean)session.getAttribute("user");
 				int hotel_id = Integer.parseInt(request.getParameter("hotel_id"));
 				int evaluation = Integer.parseInt(request.getParameter("evaluation"));

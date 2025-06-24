@@ -99,7 +99,7 @@ public class ReviewDAO {
 					ReviewsBean bean = new ReviewsBean(id, hotel_id, evaluation, comment, customer_name);
 					list.add(bean);
 				}
-				// 予約履歴をListとして返す
+				// 口コミ情報をListとして返す
 				return list;
 			} catch (SQLException e) {
 				e.printStackTrace();
