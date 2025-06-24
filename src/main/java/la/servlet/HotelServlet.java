@@ -97,7 +97,7 @@ public class HotelServlet extends HttpServlet {
 					gotoPage(request, response, "/AdminServlet?action=");
 					//重複した宿名が存在しているとき
 				} else {
-					request.setAttribute("mess", "正しく入力してください");
+					request.setAttribute("mess", "入力されていない項目があります。");
 					gotoPage(request, response, "/addHotel.jsp");
 				}
 

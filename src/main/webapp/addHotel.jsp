@@ -92,10 +92,10 @@
 				<td><input type="text" name="price"></td>
 				</tr><tr>
 			<th>チェックイン</th>
-				<td><input type="time" name="checkin"></td>
+				<td><input type="time" name="checkin" value="15:00"></td>
 				</tr><tr>
 			<th>チェックアウト</th>
-				<td><input type="time" name="checkout"></td>
+				<td><input type="time" name="checkout" value="11:00"></td>
 				</tr><tr>
 			<th>最大宿泊人数</th>
 				<td><input type="text" name="maxpersons"></td>
